@@ -21,18 +21,58 @@ class main(commands.Cog):
         else:
             return
 
-    @commands.command()
+    @commands.command(hidden=True)
     async def update(self, ctx):
         """Pulls the latest changes from git."""
         # TODO: This is blocking code :( Needs to be fixed.
         if ctx.author.id == 298618155281154058:
             process = subprocess.Popen(git.split(), stdout=subprocess.PIPE)
             out, err = process.communicate()
-            await ctx.bot.reload_bot_config()
             await ctx.send(f"Fetched latest changes from git: ```diff\n{out}\n```")
         else:
             return
 
+    @commands.command(hidden=True)
+    async def reload(self, ctx, *, cog: str):
+        if ctx.author.id == 298618155281154058:
+            cogs = []
+            for c in ctx.bot.cogs:
+                cogs.append(c.replace('Cog', ''))
+
+            if cog in cogs:
+                self.bot.unload_extension(f"cogs.{cog}")
+                self.bot.load_extension(f"cogs.{cog}")
+                await ctx.send(f'**{cog}** has been reloaded')
+            else:
+                await ctx.send(f"I can't find that cog.")
+        else:
+            return
+
+    @commands.command(hidden=True)
+    async def load(self, ctx, cog: str):
+        if ctx.author.id == 298618155281154058:
+            if os.path.isfile(f"cogs/{cog}.py") or os.path.isfile(f"Valorant-LF/cogs/{cog}.py"):
+                self.bot.load_extension(f"cogs.{cog}")
+                await ctx.send(f"**{cog}** has been loaded!")
+            else:
+                await ctx.send(f"I can't find that cog.")
+        else:
+            return
+
+    @commands.command(hidden=True)
+    async def unload(self, ctx, cog: str):
+        if ctx.author.id == 298618155281154058:
+            cogs = []
+            for c in ctx.bot.cogs:
+                cogs.append(c.replace('Cog', ''))
+            if cog in cogs:
+                self.bot.unload_extension(f"cogs.{cog}")
+                await ctx.send(f'**{cog}** has been unloaded')
+            else:
+                await ctx.send(f"I can't find that cog.")
+        else:
+            return
+            
     @commands.group()
     async def filter(self, ctx:commands.Context):
         """Base commands for the filtered related word list."""
