@@ -243,7 +243,7 @@ class main(commands.Cog):
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
-                elif any(word in message.content.lower() for word in unsupported):
+                if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     await asyncio.sleep(15)
                     await message.delete()
@@ -269,7 +269,7 @@ class main(commands.Cog):
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
-                elif any(word in message.content.lower() for word in unsupported):
+                if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     asyncio.sleep(15)
                     await message.delete()
@@ -295,7 +295,7 @@ class main(commands.Cog):
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
-                elif any(word in message.content.lower() for word in unsupported):
+                if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     await asyncio.sleep(15)
                     await message.delete()
@@ -321,7 +321,7 @@ class main(commands.Cog):
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
-                elif any(word in message.content.lower() for word in unsupported):
+                if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     await asyncio.sleep(15)
                     await message.delete()
