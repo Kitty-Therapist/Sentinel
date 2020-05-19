@@ -248,7 +248,6 @@ class main(commands.Cog):
                     await asyncio.sleep(15)
                     await message.delete()
                     await response.delete()
-                    return
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
                     if any(word in message.content.lower() for word in ranking):
@@ -274,7 +273,6 @@ class main(commands.Cog):
                     asyncio.sleep(15)
                     await message.delete()
                     await response.delete()
-                    return
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
                     if any(word in message.content.lower() for word in ranking):
@@ -300,7 +298,6 @@ class main(commands.Cog):
                     await asyncio.sleep(15)
                     await message.delete()
                     await response.delete()
-                    return
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
                     if any(word in message.content.lower() for word in ranking):
@@ -326,7 +323,6 @@ class main(commands.Cog):
                     await asyncio.sleep(15)
                     await message.delete()
                     await response.delete()
-                    return
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
                     if any(word in message.content.lower() for word in ranking):
