@@ -1,13 +1,37 @@
 import discord
 import asyncio
+import os
+import subprocess
 from discord.ext import commands
 from discord import utils
 
 from utils import Configuration 
 
+git = "git pull"
+
 class main(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
+
+    @commands.command()
+    async def restart(self, ctx:commands.Context):
+        if ctx.author.id == 298618155281154058:
+            await ctx.send("Restarting...")
+            await ctx.bot.close()
+        else:
+            return
+
+    @commands.command()
+    async def update(self, ctx):
+        """Pulls the latest changes from git."""
+        # TODO: This is blocking code :( Needs to be fixed.
+        if ctx.author.id == 298618155281154058:
+            process = subprocess.Popen(git.split(), stdout=subprocess.PIPE)
+            out, err = process.communicate()
+            await ctx.bot.reload_bot_config()
+            await ctx.send(f"Fetched latest changes from git: ```diff\n{out}\n```")
+        else:
+            return
 
     @commands.group()
     async def filter(self, ctx:commands.Context):
@@ -19,6 +43,39 @@ class main(commands.Cog):
             if ctx.subcommand_passed is None:
                 await ctx.send("The following categories we have is:\n- normal\n- ranked\n- whitelist\nTo use the command, do the following ``!vfilter add <category> <word>``")
     
+    @filter.command()
+    async def review(self, ctx, category: str):
+        if category == "ranked":
+            message = await ctx.send("Working to fetch the list! This may take a few minutes.")
+            pages = Configuration.paginate(", ".join(Configuration.getConfigVar(ctx.guild.id, "RANKED")))
+            embed = discord.Embed(title=f"This is {category}'s list of words to keep a eye out on channels other than ranked", description=f"```{pages}```", color=0xff7171)
+            await ctx.send(embed=embed)
+            await asyncio.sleep(5)
+            await message.delete()
+        if category == "normal":
+            message = await ctx.send("Working to fetch the list! This may take a few minutes.")
+            pages = Configuration.paginate(", ".join(Configuration.getConfigVar(ctx.guild.id, "NORMAL")))
+            embed = discord.Embed(title=f"This is{category}'s list of words to keep an eye out on channels other than normal", description=f"```{pages}```", color=0xff7171)
+            await ctx.send(embed=embed)
+            await asyncio.sleep(5)
+            await message.delete()
+        if category == "whitelist":
+            message = await ctx.send("Working to fetch the list! This may take a few minutes.")
+            pages = Configuration.paginate(", ".join(Configuration.getConfigVar(ctx.guild.id, "WHITELIST")))
+            embed = discord.Embed(title=f"This is{category}'s list of words to keep an eye out for any false positives", description=f"```{pages}```", color=0xff7171)
+            await ctx.send(embed=embed)
+            await asyncio.sleep(5)
+            await message.delete()
+        if category == "unsupported":
+            message = await ctx.send("Working to fetch the list! This may take a few minutes.")
+            pages = Configuration.paginate(", ".join(Configuration.getConfigVar(ctx.guild.id, "UNSUPPORTED")))
+            embed = discord.Embed(title=f"This is{category}'s list of words to keep an eye out", description=f"```{pages}```", color=0xff7171)
+            await ctx.send(embed=embed)
+            await asyncio.sleep(5)
+            await message.delete()
+        else:
+            return
+
     @filter.command()
     async def add(self, ctx, category: str, *, word: str):
         #Channel for channel mentioning thingy.
@@ -61,8 +118,17 @@ class main(commands.Cog):
                     ignore.append(word)
                     await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out in {rankedNA} | {rankedEU} and {normalNA} | {normalEU} in case of any false positives.")
                     Configuration.setConfigVar(ctx.guild.id, "WHITELIST", ignore)
+            #Unsupported related things
+            if category == "unsupported":
+                blacklist = Configuration.getConfigVar(ctx.guild.id, "UNSUPPORTED")
+                if word in blacklist:
+                    await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
+                else:
+                    blacklist.append(word)
+                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
+                    Configuration.setConfigVar(ctx.guild.id, "UNSUPPORTED", blacklist)
             else:
-                await ctx.send("The following categories we have is:\n- normal\n- ranked\n- whitelist\nTo use the command, do the following ``!vfilter add <category> <word>``")
+                await ctx.send("The following categories we have is:\n- normal\n- ranked\n- whitelist\n- unsupported\nTo use the command, do the following ``!vfilter add <category> <word>``")
     
     @filter.command()
     async def remove(self, ctx, category:str, *, word: str):
@@ -106,8 +172,18 @@ class main(commands.Cog):
                     ignore.remove(word)
                     await ctx.send(f"I have removed ``{word}`` from the list for me to keep a eye out in {rankedNA} | {rankedEU} and {normalNA} | {normalEU} in case of any false positives. I will no longer keep a eye out for {word}")
                     Configuration.setConfigVar(ctx.guild.id, "WHITELIST", ignore)
+
+            #Unsupported related things
+            if category == "unsupported":
+                blacklist = Configuration.getConfigVar(ctx.guild.id, "UNSUPPORTED")
+                if word in blacklist:
+                    await ctx.send(f"Looks like that ``{word}`` is already removed from the list and I'm not currently keeping an eye out in any channels for {word}.")
+                else:
+                    blacklist.remove(word)
+                    await ctx.send(f"I have removed ``{word}`` to the list I will no longer keep an eye out in any channels for {word}.")
+                    Configuration.setConfigVar(ctx.guild.id, "UNSUPPORTED", blacklist)
             else:
-                await ctx.send("The following categories we have is:\n- normal\n- ranked\n- whitelist\nTo use the command, do the following ``!vfilter remove <category> <word>``")
+                await ctx.send("The following categories we have is:\n- normal\n- ranked\n- whitelist\n- unsupported\nTo use the command, do the following ``!vfilter remove <category> <word>``")
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -123,9 +199,12 @@ class main(commands.Cog):
             if message.author.id == 706269652724219987:
                 return
             else:
+                unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
+                elif any(word in message.content.lower() for word in unsupported):
+                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
                     if any(word in message.content.lower() for word in ranking):
@@ -146,6 +225,8 @@ class main(commands.Cog):
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
+                elif any(word in message.content.lower() for word in unsupported):
+                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
                     if any(word in message.content.lower() for word in ranking):
@@ -166,6 +247,8 @@ class main(commands.Cog):
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
+                elif any(word in message.content.lower() for word in unsupported):
+                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
                     if any(word in message.content.lower() for word in ranking):
@@ -186,6 +269,8 @@ class main(commands.Cog):
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
+                elif any(word in message.content.lower() for word in unsupported):
+                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
                     if any(word in message.content.lower() for word in ranking):
