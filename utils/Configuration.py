@@ -4,6 +4,8 @@ import os
 import copy
 import traceback
 import discord
+import subprocess
+from subprocess import Popen
 from discord.ext import commands
 from discord import utils
 
@@ -13,7 +15,8 @@ SERVER_CONFIGS = dict()
 CONFIG_TEMPLATE = {
     "RANKED": [],
     "NONRANKED": [],
-    "WHITELIST": []
+    "WHITELIST": [],
+    "UNSUPPORTED": []
 }
 
 async def onReady(bot:commands.Bot):
@@ -93,3 +96,37 @@ def saveMasterConfig():
     global MASTER_CONFIG
     with open('config/master.json', 'w') as jsonfile:
         jsonfile.write((json.dumps(MASTER_CONFIG, indent=4, skipkeys=True, sort_keys=True)))
+
+### Other things unrelated to Configuration
+
+def paginate(input, max_lines=30, max_chars=1850, prefix="", suffix=""):
+    max_chars -= len(prefix.format(page=100, pages=100)) + len(suffix.format(page=100, pages=100))
+    lines = str(input).splitlines(keepends=True)
+    pages = list()
+    page = ""
+    count = 0
+    for line in lines:
+        if len(page) + len(line) > max_chars or count == max_lines:
+            if page == "":
+                # single 2k line, split smaller
+                words = line.split(" ")
+                for word in words:
+                    if len(page) + len(word) > max_chars:
+                        pages.append(page)
+                        page = f"{word} "
+                    else:
+                        page += f"{word} "
+            else:
+                pages.append(page)
+                page = line
+                count = 1
+        else:
+            page += line
+        count += 1
+    pages.append(page)
+    page_count = 1
+    total_pages = len(pages)
+    real_pages = list()
+    for page in pages:
+        real_pages.append(f"{prefix.format(page=page_count, pages=total_pages)}{page}{suffix.format(page=page_count, pages=total_pages)}")
+    return real_pages
