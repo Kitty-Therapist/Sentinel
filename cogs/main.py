@@ -245,6 +245,10 @@ class main(commands.Cog):
                     return
                 elif any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                    await asyncio.sleep(15)
+                    await message.delete()
+                    await response.delete()
+                    return
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
                     if any(word in message.content.lower() for word in ranking):
@@ -267,6 +271,10 @@ class main(commands.Cog):
                     return
                 elif any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                    asyncio.sleep(15)
+                    await message.delete()
+                    await response.delete()
+                    return
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
                     if any(word in message.content.lower() for word in ranking):
@@ -289,6 +297,10 @@ class main(commands.Cog):
                     return
                 elif any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                    await asyncio.sleep(15)
+                    await message.delete()
+                    await response.delete()
+                    return
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
                     if any(word in message.content.lower() for word in ranking):
@@ -311,6 +323,10 @@ class main(commands.Cog):
                     return
                 elif any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                    await asyncio.sleep(15)
+                    await message.delete()
+                    await response.delete()
+                    return
                 else:
                     ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
                     if any(word in message.content.lower() for word in ranking):
