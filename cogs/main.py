@@ -246,7 +246,7 @@ class main(commands.Cog):
                 if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     log = self.bot.get_channel(712640778136059975)
-                    await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id} containing:\n```{message.content}")
+                    await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id}) containing:\n```{message.content}```")
                     await asyncio.sleep(15)
                     await message.delete()
                     await response.delete()
@@ -255,7 +255,7 @@ class main(commands.Cog):
                     if any(word in message.content.lower() for word in ranking):
                             response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{rankedNA}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                             log = self.bot.get_channel(712640778136059975)
-                            await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id} containing:\n```{message.content}")
+                            await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id}) containing:\n```{message.content}```")
                             await asyncio.sleep(15)
                             await message.delete()
                             await response.delete()
@@ -275,7 +275,7 @@ class main(commands.Cog):
                 if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     log = self.bot.get_channel(712640778136059975)
-                    await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id} containing:\n```{message.content}")
+                    await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id}) containing:\n```{message.content}```")
                     asyncio.sleep(15)
                     await message.delete()
                     await response.delete()
@@ -284,7 +284,7 @@ class main(commands.Cog):
                     if any(word in message.content.lower() for word in ranking):
                             response = await message.channel.send(f"Hey there {message.author.mention}, seems like you may be looking for this channel :arrow_right: **{rankedEU}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                             log = self.bot.get_channel(712640778136059975)
-                            await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id} containing:\n```{message.content}")
+                            await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id}) containing:\n```{message.content}```")
                             await asyncio.sleep(15)
                             await message.delete()
                             await response.delete()
@@ -304,7 +304,7 @@ class main(commands.Cog):
                 if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     log = self.bot.get_channel(712640778136059975)
-                    await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id} containing:\n```{message.content}")
+                    await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id}) containing:\n```{message.content}```")
                     await asyncio.sleep(15)
                     await message.delete()
                     await response.delete()
@@ -313,7 +313,7 @@ class main(commands.Cog):
                     if any(word in message.content.lower() for word in ranking):
                             response = await message.channel.send(f"{message.author.mention}, seems like you may be looking for this channel :arrow_right: **{normalNA}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                             log = self.bot.get_channel(712640778136059975)
-                            await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id} containing:\n```{message.content}")
+                            await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id}) containing:\n```{message.content}```")
                             await asyncio.sleep(15)
                             await message.delete()
                             await response.delete()
@@ -333,7 +333,7 @@ class main(commands.Cog):
                 if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     log = self.bot.get_channel(712640778136059975)
-                    await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id} containing:\n```{message.content}")
+                    await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id}) containing:\n```{message.content}```")
                     await asyncio.sleep(15)
                     await message.delete()
                     await response.delete()
@@ -342,7 +342,7 @@ class main(commands.Cog):
                     if any(word in message.content.lower() for word in ranking):
                             response = await message.channel.send(f"{message.author.mention}, seems like you may be looking for this channel :arrow_right: **{normalEU}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                             log = self.bot.get_channel(712640778136059975)
-                            await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id} containing:\n```{message.content}")
+                            await log.send(f"Caught message from {message.author.name}#{message.author.discriminator} ({message.author.id}) containing:\n```{message.content}```")
                             await asyncio.sleep(15)
                             await message.delete()
                             await response.delete()
