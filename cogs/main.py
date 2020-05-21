@@ -259,7 +259,7 @@ class main(commands.Cog):
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
-                elif any(word in message.content.lower() for word in unsupported):
+                if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     log = self.bot.get_channel(712640778136059975)
                     embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
@@ -290,7 +290,7 @@ class main(commands.Cog):
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
-                elif any(word in message.content.lower() for word in unsupported):
+                if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     log = self.bot.get_channel(712640778136059975)
                     embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
@@ -321,7 +321,7 @@ class main(commands.Cog):
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
-                elif any(word in message.content.lower() for word in unsupported):
+                if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     log = self.bot.get_channel(712640778136059975)
                     embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
@@ -352,7 +352,7 @@ class main(commands.Cog):
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
-                elif any(word in message.content.lower() for word in unsupported):
+                if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     log = self.bot.get_channel(712640778136059975)
                     embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
