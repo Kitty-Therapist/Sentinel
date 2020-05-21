@@ -2,6 +2,7 @@ import discord
 import asyncio
 import os
 import subprocess
+from subprocess import Popen
 from discord.ext import commands
 from discord import utils
 
@@ -22,13 +23,15 @@ class main(commands.Cog):
             return
 
     @commands.command(hidden=True)
-    async def update(self, ctx):
-        """Pulls the latest changes from git."""
-        # TODO: This is blocking code :( Needs to be fixed.
+    async def pull(self, ctx):
+        """Pulls from github so an upgrade can be performed without full restart"""
         if ctx.author.id == 298618155281154058:
-            process = subprocess.Popen(git.split(), stdout=subprocess.PIPE)
-            out, err = process.communicate()
-            await ctx.send(f"Fetched latest changes from git: ```diff\n{out}\n```")
+            async with ctx.typing():
+                p = Popen(["git pull"], cwd=os.getcwd(), shell=True, stdout=subprocess.PIPE)
+                while p.poll() is None:
+                    await asyncio.sleep(1)
+                out, error = p.communicate()
+                await ctx.send(f"Pull completed with exit code {p.returncode}```yaml\n{out.decode('utf-8')}```")
         else:
             return
 
