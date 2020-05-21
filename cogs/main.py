@@ -280,10 +280,11 @@ class main(commands.Cog):
                     else:
                         return
         #looking for normal EU
-        if message.channel.id == 697060525842104330:
+        if message.channel.id == 697060525842104330: 
             if message.author.id == 706269652724219987:
                 return
             else:
+                unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
@@ -313,6 +314,7 @@ class main(commands.Cog):
             if message.author.id == 706269652724219987:
                 return
             else:
+                unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
@@ -336,12 +338,13 @@ class main(commands.Cog):
                             await response.delete()
                     else:
                         return
-                        
+
         #looking for ranked EU
         if message.channel.id == 705974465212710952:
             if message.author.id == 706269652724219987:
                 return
             else:
+                unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
                 if any(word in message.content.lower() for word in whitelist):
                     return
