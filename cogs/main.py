@@ -261,8 +261,8 @@ class main(commands.Cog):
                     return
                 if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                    log = self.bot.get_channel(712640778136059975)
-                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
+                    log = self.bot.get_channel(683067565127237705)
+                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                     await log.send(embed=embed)
                     await asyncio.sleep(15)
                     await message.delete()
@@ -271,8 +271,8 @@ class main(commands.Cog):
                     ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
                     if any(word in message.content.lower() for word in ranking):
                             response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{rankedNA}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                            log = self.bot.get_channel(712640778136059975)
-                            embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
+                            log = self.bot.get_channel(683067565127237705))
+                            embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                             await log.send(embed=embed)
                             await asyncio.sleep(15)
                             await message.delete()
@@ -290,8 +290,8 @@ class main(commands.Cog):
                     return
                 if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                    log = self.bot.get_channel(712640778136059975)
-                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
+                    log = self.bot.get_channel(683067565127237705))
+                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                     await log.send(embed=embed)
                     asyncio.sleep(15)
                     await message.delete()
@@ -300,7 +300,7 @@ class main(commands.Cog):
                     ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
                     if any(word in message.content.lower() for word in ranking):
                             response = await message.channel.send(f"Hey there {message.author.mention}, seems like you may be looking for this channel :arrow_right: **{rankedEU}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                            log = self.bot.get_channel(712640778136059975)
+                            log = self.bot.get_channel(683067565127237705))
                             embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
                             await log.send(embed=embed)
                             await asyncio.sleep(15)
@@ -320,8 +320,8 @@ class main(commands.Cog):
                     return
                 if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                    log = self.bot.get_channel(712640778136059975)
-                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
+                    log = self.bot.get_channel(683067565127237705))
+                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                     await log.send(embed=embed)
                     await asyncio.sleep(15)
                     await message.delete()
@@ -330,8 +330,8 @@ class main(commands.Cog):
                     ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
                     if any(word in message.content.lower() for word in ranking):
                             response = await message.channel.send(f"{message.author.mention}, seems like you may be looking for this channel :arrow_right: **{normalNA}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                            log = self.bot.get_channel(712640778136059975)
-                            embed = discord.Embed(title=f"Filtered Word from non-ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
+                            log = self.bot.get_channel(683067565127237705))
+                            embed = discord.Embed(title=f"Filtered Word from non-ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                             await log.send(embed=embed)
                             await asyncio.sleep(15)
                             await message.delete()
@@ -350,8 +350,8 @@ class main(commands.Cog):
                     return
                 if any(word in message.content.lower() for word in unsupported):
                     response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                    log = self.bot.get_channel(712640778136059975)
-                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
+                    log = self.bot.get_channel(683067565127237705))
+                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                     await log.send(embed=embed)
                     await asyncio.sleep(15)
                     await message.delete()
@@ -360,8 +360,8 @@ class main(commands.Cog):
                     ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
                     if any(word in message.content.lower() for word in ranking):
                             response = await message.channel.send(f"{message.author.mention}, seems like you may be looking for this channel :arrow_right: **{normalEU}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                            log = self.bot.get_channel(712640778136059975)
-                            embed = discord.Embed(title=f"Filtered Word from non-ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
+                            log = self.bot.get_channel(683067565127237705))
+                            embed = discord.Embed(title=f"Filtered Word from non-ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                             await log.send(embed=embed)
                             await asyncio.sleep(15)
                             await message.delete()
