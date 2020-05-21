@@ -279,9 +279,6 @@ class main(commands.Cog):
                             await response.delete()
                     else:
                         return
-        else:
-            return
-
         #looking for normal EU
         if message.channel.id == 697060525842104330:
             if message.author.id == 706269652724219987:
@@ -310,10 +307,8 @@ class main(commands.Cog):
                             await response.delete()
                     else:
                         return
-        else:
-            return
     
-            #looking for ranked NA
+        #looking for ranked NA
         if message.channel.id == 705974194906726410:
             if message.author.id == 706269652724219987:
                 return
@@ -341,9 +336,7 @@ class main(commands.Cog):
                             await response.delete()
                     else:
                         return
-        else:
-            return
-
+                        
         #looking for ranked EU
         if message.channel.id == 705974465212710952:
             if message.author.id == 706269652724219987:
