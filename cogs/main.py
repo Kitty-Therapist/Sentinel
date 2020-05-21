@@ -231,13 +231,13 @@ class main(commands.Cog):
     @commands.Cog.listener()
     async def on_connect(self):
         log = self.bot.get_channel(712640778136059975)
-        embed = discord.Embed(title=f"Connected to the gateway.", description=f"{self.bot.name}#{self.bot.discriminator} has connected to the gateway!", color=5109096)
+        embed = discord.Embed(title=f"Connected to the gateway.", description=f"{self.bot.name}#{self.bot.discriminator} has connected to the gateway.", color=5109096)
         await log.send(embed=embed)
     
     @commands.Cog.listener()
     async def on_disconnect(self):
         log = self.bot.get_channel(712640778136059975)
-        embed = discord.Embed(title=f"Disconnected from the gateway.", description=f"{self.bot.name}#{self.bot.discriminator} has disconnected from the gateway!", color=16098851)
+        embed = discord.Embed(title=f"Disconnected from the gateway.", description=f"{self.bot.name}#{self.bot.discriminator} has disconnected from the gateway.", color=16098851)
         await log.send(embed=embed)    
 
 
