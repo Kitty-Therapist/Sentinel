@@ -189,7 +189,7 @@ class main(commands.Cog):
             #Normal NA + EU
             if category == "normal":
                 blacklist = Configuration.getConfigVar(ctx.guild.id, "NONRANKED")
-                if word in blacklist:
+                if word not in blacklist:
                     await ctx.send(f"Looks like that ``{word}`` is already removed from the list and I'm not currently keeping an eye out in any channel(s) other than {normalNA} and {normalEU} for {word}!")
                 else: 
                     blacklist.remove(word)
@@ -199,7 +199,7 @@ class main(commands.Cog):
             #Ranked NA + EU
             if category == "ranked":
                 blacklist = Configuration.getConfigVar(ctx.guild.id, "RANKED")
-                if word in blacklist:
+                if word not in blacklist:
                     await ctx.send(f"Looks like that ``{word}`` is already removed from the list and I'm not currently keeping an eye out in any channel(s) other than {rankedNA} and {rankedEU} for {word}!")
                 else:
                     blacklist.remove(word)
@@ -209,7 +209,7 @@ class main(commands.Cog):
             #Whitelist for any false positives
             if category == "whitelist":
                 ignore = Configuration.getConfigVar(ctx.guild.id, "WHITELIST")
-                if word in ignore:
+                if word not in ignore:
                     await ctx.send(f"Looks like that ``{word}`` has been removed from the list for me to keep a eye out in {rankedNA} | {rankedEU} and {normalNA} | {normalEU} in case of any false positives.")
                 else:
                     ignore.remove(word)
@@ -219,7 +219,7 @@ class main(commands.Cog):
             #Unsupported related things
             if category == "unsupported":
                 blacklist = Configuration.getConfigVar(ctx.guild.id, "UNSUPPORTED")
-                if word in blacklist:
+                if word not in blacklist:
                     await ctx.send(f"Looks like that ``{word}`` is already removed from the list and I'm not currently keeping an eye out in any channels for {word}.")
                 else:
                     blacklist.remove(word)
