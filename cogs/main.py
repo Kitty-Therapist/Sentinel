@@ -239,7 +239,12 @@ class main(commands.Cog):
         log = self.bot.get_channel(712640778136059975)
         embed = discord.Embed(title=f"Disconnected from the gateway.", description=f"Disconnected from the gateway.", color=16098851)
         await log.send(embed=embed)    
-
+    
+    @commands.Cog.listener()
+    async def on_resume(self):
+        log = self.bot.get_channel(712640778136059975)
+        embed = discord.Embed(title=f"Resumed connection to the gateway", description=f"Must be the bot, not Discord xd", color=16098851)
+        await log.send(embed=embed)
 
     @commands.Cog.listener()
     async def on_message(self, message):
