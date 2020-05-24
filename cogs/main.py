@@ -259,6 +259,10 @@ class main(commands.Cog):
         if message.channel.id == 697060120252776478:
             if message.author.id == 706269652724219987:
                 return
+            if 679879783630372865 in [role.id for role in message.author.roles]:
+                return
+            if 684144438251225099 in [role.id for role in message.author.roles]:
+                return
             else:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
@@ -288,6 +292,10 @@ class main(commands.Cog):
         #looking for normal EU
         if message.channel.id == 697060525842104330: 
             if message.author.id == 706269652724219987:
+                return
+            if 679879783630372865 in [role.id for role in message.author.roles]:
+                return
+            if 684144438251225099 in [role.id for role in message.author.roles]:
                 return
             else:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
@@ -319,6 +327,10 @@ class main(commands.Cog):
         if message.channel.id == 705974194906726410:
             if message.author.id == 706269652724219987:
                 return
+            if 679879783630372865 in [role.id for role in message.author.roles]:
+                return
+            if 684144438251225099 in [role.id for role in message.author.roles]:
+                return
             else:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
@@ -348,6 +360,10 @@ class main(commands.Cog):
         #looking for ranked EU
         if message.channel.id == 705974465212710952:
             if message.author.id == 706269652724219987:
+                return
+            if 679879783630372865 in [role.id for role in message.author.roles]:
+                return
+            if 684144438251225099 in [role.id for role in message.author.roles]:
                 return
             else:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
