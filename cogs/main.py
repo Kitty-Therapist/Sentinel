@@ -125,6 +125,7 @@ class main(commands.Cog):
             await asyncio.sleep(180)
             await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
             await asyncio.sleep(180)
+            await ctx.send("The hour has been completed. I am done sending messages. ")
 
 
     @commands.group()
