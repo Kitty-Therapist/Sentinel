@@ -16,7 +16,8 @@ CONFIG_TEMPLATE = {
     "RANKED": [],
     "NONRANKED": [],
     "WHITELIST": [],
-    "UNSUPPORTED": []
+    "UNSUPPORTED": [],
+    "LOOKINGFOR": []
 }
 
 async def onReady(bot:commands.Bot):

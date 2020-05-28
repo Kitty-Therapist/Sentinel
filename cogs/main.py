@@ -168,6 +168,13 @@ class main(commands.Cog):
             await ctx.send(embed=embed)
             await asyncio.sleep(5)
             await message.delete()
+        if category == "lookingfor":
+            message = await ctx.send("Working to fetch the list! This may take a few minutes.")
+            pages = Configuration.paginate(", ".join(Configuration.getConfigVar(ctx.guild.id, "LOOKINGFOR")))
+            embed = discord.Embed(title=f"This is {category}'s list of words to keep an eye out", description=f"```{pages}```", color=0xff7171)
+            await ctx.send(embed=embed)
+            await asyncio.sleep(5)
+            await message.delete()
         else:
             return
 
@@ -222,8 +229,18 @@ class main(commands.Cog):
                     blacklist.append(word)
                     await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
                     Configuration.setConfigVar(ctx.guild.id, "UNSUPPORTED", blacklist)
+            if category == "lookingfor":
+                blacklist = Configuration.getConfigVar(ctx.guild.id, "LOOKINGFOR")
+                if word in blacklist:
+                    await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
+                else:
+                    blacklist.append(word)
+                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
+                    Configuration.setConfigVar(ctx.guild.id, "LOOKINGFOR", blacklist)
             else:
-                await ctx.send("The following categories we have is:\n- normal\n- ranked\n- whitelist\n- unsupported\nTo use the command, do the following ``!vfilter add <category> <word>``")
+                await ctx.send("The following categories we have is:\n- normal\n- ranked\n- whitelist\n- unsupported\n- lookingfor\nTo use the command, do the following ``!vfilter add <category> <word>``")
+            
+
     
     @filter.command()
     async def remove(self, ctx, category:str, *, word: str):
@@ -277,8 +294,16 @@ class main(commands.Cog):
                     blacklist.remove(word)
                     await ctx.send(f"I have removed ``{word}`` to the list I will no longer keep an eye out in any channels for {word}.")
                     Configuration.setConfigVar(ctx.guild.id, "UNSUPPORTED", blacklist)
+            if category == "lookingfor":
+                blacklist = Configuration.getConfigVar(ctx.guild.id, "LOOOKINGFOR")
+                if word not in blacklist:
+                    await ctx.send(f"Looks like that ``{word}`` is already removed from the list and I'm not currently keeping an eye out in any channels for {word}.")
+                else:
+                    blacklist.remove(word)
+                    await ctx.send(f"I have removed ``{word}`` to the list I will no longer keep an eye out in any channels for {word}.")
+                    Configuration.setConfigVar(ctx.guild.id, "LOOKING FOR", blacklist)
             else:
-                await ctx.send("The following categories we have is:\n- normal\n- ranked\n- whitelist\n- unsupported\nTo use the command, do the following ``!vfilter remove <category> <word>``")
+                await ctx.send("The following categories we have is:\n- normal\n- ranked\n- whitelist\n- unsupported\n- lookingfor\nTo use the command, do the following ``!vfilter remove <category> <word>``")
     
     @commands.Cog.listener()
     async def on_connect(self):
@@ -340,6 +365,20 @@ class main(commands.Cog):
                             await response.delete()
                     else:
                         return
+        if message.guild.id == 679875946597056683:
+            if message.author.id == 706269652724219987:
+                return
+            if 679879783630372865 in [role.id for role in message.author.roles]:
+                return
+            if 684144438251225099 in [role.id for role in message.author.roles]:
+                return
+            else:
+                lookingfor = Configuration.getConfigVar(message.guild.id, "LOOKINGFOR")
+                if any(word in message.content.lower() for word in lookingfor):
+                    log = self.bot.get_channel(683067565127237705)
+                    embed = discord.Embed(title=f"Filtered Word that was looking for group", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                    await log.send(embed=embed)
+                    await message.delete()
 
         #looking for normal EU
         if message.channel.id == 697060525842104330: 
