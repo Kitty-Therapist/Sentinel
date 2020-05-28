@@ -75,7 +75,58 @@ class main(commands.Cog):
                 await ctx.send(f"I can't find that cog.")
         else:
             return
-            
+    
+    @commands.command()
+    async def release(self, ctx:commands.Context):
+        """Spam the same message over and over for an hour."""
+        log = ctx.guild.get_channel(679877028991860876)
+        Mods = discord.utils.get(ctx.guild.roles, id=703063141990400001)
+        if 703063141990400001 not in [role.id for role in ctx.author.roles]:
+            return
+        else:
+            await ctx.send("Now sending the release tag in every 3 minutes for an hour!")
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+            await log.send(":warning::warning: **VALORANT will be released on the 2nd of June, until then you will be unable to access the game. For more information, please go to <#715612494420508703>.** :warning::warning:")
+            await asyncio.sleep(180)
+
+
     @commands.group()
     async def filter(self, ctx:commands.Context):
         """Base commands for the filtered related word list."""
