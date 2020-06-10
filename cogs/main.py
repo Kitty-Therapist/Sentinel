@@ -325,6 +325,16 @@ class main(commands.Cog):
         rankedNA = "<#705974194906726410>"
         rankedEU = "<#705974465212710952>"
         modmail = "<@703058322944950394>"
+    
+        if message.server.id == 679875946597056683:
+            if "@everyone" in message.content:
+                log = self.bot.get_channel(712640778136059975)
+                await log.send(f"{message.author.id} just tried to ping everyone!")
+                await message.delete()
+            else:
+                return
+        else:
+            return
 
         #looking for normal NA
         if message.channel.id == 697060120252776478:
