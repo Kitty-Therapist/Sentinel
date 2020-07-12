@@ -27,6 +27,7 @@ class moderation(commands.Cog):
         pullroomrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "PULLROOMROLE"))
         logs = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOMLOG"))
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
+        user = ctx.guild.get_member(member.id)
         if modrole not in ctx.author.roles:
             return
         else:
@@ -45,9 +46,9 @@ class moderation(commands.Cog):
                 embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                 await ctx.send(embed=embed)
             else:
-                if pullroomrole not in ctx.guild.member.roles:
+                if pullroomrole not in user.roles:
                     try:
-                        await ctx.guild.member.add_roles(pullroomrole)
+                        await user.add_roles(pullroomrole)
                     except discord.Forbidden as e:
                         embed=discord.Embed(title="Cannot add Pullroom role", description=f":warning: I was not able to add {member.name}#{member.discriminator} (``{member.id}``) to the pullroom. It would appear that I do not have Manage Roles permission to continue, please have a Senior Moderator or a Bot Developer to fix this. \n\nIf this persists, contact Ghoul.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                         embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
@@ -82,6 +83,7 @@ class moderation(commands.Cog):
         pullroomrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "PULLROOMROLE"))
         logs = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOMLOG"))
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
+        user = ctx.guild.get_member(member.id)
         if modrole not in ctx.author.roles:
             return
         if ctx.guild.get_member(member.id) is None:
@@ -100,9 +102,9 @@ class moderation(commands.Cog):
                 embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                 await ctx.send(embed=embed)
             else:
-                if pullroomrole in ctx.guild.member.roles:
+                if pullroomrole in user.roles:
                     try:
-                        await ctx.guild.member.remove_roles(pullroomrole)
+                        await user.remove_roles(pullroomrole)
                     except discord.Forbidden as e:
                         embed=discord.Embed(title="Cannot remove Pullroom role", description=f":warning: I was not able to remove {member.name}#{member.discriminator} (``{member.id}``) from the pullroom. It would appear that I do not have Manage Roles permission to continue, please have a Senior Moderator or a Bot Developer to fix this. \n\nIf this persists, contact Ghoul.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                         embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
