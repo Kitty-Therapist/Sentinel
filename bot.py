@@ -24,6 +24,8 @@ initial_extensions = ['lookingfor', 'moderation', 'admin']
 if not os.path.exists('config'):
     os.makedirs('config')
 
+TOKEN = "bot token"
+
 @bot.event
 async def on_command_error(ctx: commands.Context, error):
     logs = bot.get_channel(712640778136059975)
@@ -112,17 +114,17 @@ if __name__ == '__main__':
     for extension in initial_extensions:
         bot.load_extension(f"cogs.{extension}")
 
-if __name__ == '__main__':
-    parser = ArgumentParser()
-    parser.add_argument("--token", help="Specify your Discord token")
+#if __name__ == '__main__':
+    #parser = ArgumentParser()
+    #parser.add_argument("--token", help="Specify your Discord token")
 
-    clargs = parser.parse_args()
-    if 'botlogin' in os.environ:
-        token = os.environ['botlogin']
-    elif clargs.token:
-        token = clargs.token
-    else:
-        token = input("Please enter your Discord token: ")
+    #clargs = parser.parse_args()
+    #if 'botlogin' in os.environ:
+    #    token = os.environ['botlogin']
+    #elif clargs.token:
+    #    token = clargs.token
+    ##else:
+    #   token = input("Please enter your Discord token: ")
 
 @bot.event
 async def on_ready():
@@ -134,5 +136,5 @@ async def on_ready():
         print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}' + f'\nVersion: {discord.__version__}\n')
         await bot.change_presence(activity=discord.Activity(name='Looking for category', type=discord.ActivityType.watching))
 
-bot.run(token)
+bot.run(TOKEN)
 
