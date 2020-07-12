@@ -11,20 +11,41 @@ from discord import utils
 
 MASTER_CONFIG = dict()
 SERVER_CONFIGS = dict()
+MASTER_LOADED = False
+BOT = None
 
 CONFIG_TEMPLATE = {
+    "NONRANKED-NA": 0,
+    "RANKED-NA": 0,
+    "NONRANKED-EU": 0,
+    "RANKED-EU": 0, 
+    "NONRANKED-OTHER": 0,
+    "RANKED-OTHER": 0,
+    "PULLROOMROLE": 0,
+    "PULLROOM": 0,
+    "PULLROOMLOG": 0,
+    "MODROLE": 0,
+    "LOGGING": 0,
     "RANKED": [],
     "NONRANKED": [],
     "WHITELIST": [],
-    "UNSUPPORTED": [],
-    "LOOKINGFOR": []
+    "UNSUPPORTED": []
 }
 
+def initialize(bot):
+    global BOT
+    BOT = bot
+    
 async def onReady(bot:commands.Bot):
     print(f"Loading configurations for {len(bot.guilds)} guilds")
     for guild in bot.guilds:
-        print(f"Loading info for {guild.name} ({guild.id})")
-        loadConfig(guild)
+        if guild.id == 679875946597056683:
+            VALORANT = "VALORANT"
+            print(f"Loading info for {VALORANT} ({guild.id})")
+            loadConfig(guild)
+        else:
+            print(f"Loading info for {guild.name} ({guild.id})")
+            loadConfig(guild)
 
 
 def loadGlobalConfig():
@@ -54,23 +75,9 @@ def loadConfig(guild:discord.Guild):
         SERVER_CONFIGS[guild.id] = copy.deepcopy(CONFIG_TEMPLATE)
         saveConfig(guild.id)
 
-def loadConfigFile(id):
-    global SERVER_CONFIGS
-    try:
-        with open(f'config/{id}.json', 'r') as jsonfile:
-            config = json.load(jsonfile)
-            for key in CONFIG_TEMPLATE:
-                if key not in config:
-                    config[key] = CONFIG_TEMPLATE[key]
-            SERVER_CONFIGS[id] = config
-    except FileNotFoundError:
-        print(f"No config available for ({guild.id}), creating blank one.")
-        SERVER_CONFIGS[id] = copy.deepcopy(CONFIG_TEMPLATE)
-        saveConfig(id)
-
 def getConfigVar(id, key):
     if id not in SERVER_CONFIGS.keys():
-        loadConfigFile(id)
+        loadConfig(id)
     return SERVER_CONFIGS[id][key]
 
 def getConfigVarChannel(id, key, bot:commands.Bot):
