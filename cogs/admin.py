@@ -225,6 +225,17 @@ class admin(commands.Cog):
                 embed=discord.Embed(title="Invalid Channel on Setting Logging Channel", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid channelID, please make sure to provide me with the correct channelID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                 await ctx.send(embed=embed)  
+                
+    @commands.guild_only()
+    @configure.command()
+    async def censor(self, ctx: commands.Context, *, word:str):
+        blacklist = Configuration.getConfigVar(ctx.guild.id, "CENSOR")
+        if word in blacklist:
+            await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
+        else:
+            blacklist.append(word)
+            await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
+            Configuration.setConfigVar(ctx.guild.id, "CENSOR", blacklist)
 
 
 def setup(bot):
