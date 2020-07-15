@@ -17,6 +17,32 @@ from argparse import ArgumentParser
 class moderation(commands.Cog):
     def __init__(self, bot):
         pass
+    
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if message.guild.id == 679875946597056683:
+            if message.author.id == 706269652724219987:
+                return
+            if 679879783630372865 in [role.id for role in message.author.roles]:
+                return
+            if 684144438251225099 in [role.id for role in message.author.roles]:
+                return
+            if 703063141990400001 in [role.id for role in message.author.roles]:
+                return
+            if 695765776086597663 in [role.id for role in message.author.roles]:
+                return
+            else:
+                censor = Configuration.getConfigVar(message.guild.id, "CENSOR")
+                if any(word in message.content.lower() for word in censor):
+                    response = await message.channel.send(f"Please do not send messages containing any of the censored words / invites.")
+                    logging = message.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOMLOG"))
+                    embed = discord.Embed(title=f"Filtered Message in Censor", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                    await logging.send(embed=embed)
+                    asyncio.sleep(15)
+                    await message.delete()
+                    await response.delete()
+        else:
+            return  
 
     #This allows the moderator to pull the user into a private channel to discuss with them.
     @commands.command()
