@@ -26,6 +26,7 @@ CONFIG_TEMPLATE = {
     "PULLROOMLOG": 0,
     "MODROLE": 0,
     "LOGGING": 0,
+    "CENSOR": [],
     "RANKED": [],
     "NONRANKED": [],
     "WHITELIST": [],
