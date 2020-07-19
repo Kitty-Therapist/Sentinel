@@ -115,7 +115,7 @@ class lookingfor(commands.Cog):
         normalEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-EU"))
         rankedEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-EU"))
         normalOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-OTHER"))
-        rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-OTHER"))
+        rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED.OTHER"))
         if modrole not in ctx.author.roles:
             return
         else:
@@ -168,7 +168,7 @@ class lookingfor(commands.Cog):
         normalEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-EU"))
         rankedEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-EU"))
         normalOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-OTHER"))
-        rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-OTHER"))
+        rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED.OTHER"))
         if modrole not in ctx.author.roles:
             return
         else:
@@ -227,7 +227,7 @@ class lookingfor(commands.Cog):
         modmail = "<@711678018573303809>"
 
         #looking for normal NA
-        if message.channel.id == normalNA:
+        if message.channel.id == normalNA.id:
             if message.author.id == 706269652724219987:
                 return
             if 679879783630372865 in [role.id for role in message.author.roles]:
@@ -259,7 +259,7 @@ class lookingfor(commands.Cog):
                         return
 
         #looking for normal EU
-        if message.channel.id == normalEU: 
+        if message.channel.id == normalEU.id: 
             if message.author.id == 706269652724219987:
                 return
             if 679879783630372865 in [role.id for role in message.author.roles]:
@@ -272,7 +272,7 @@ class lookingfor(commands.Cog):
                 if any(word in message.content.lower() for word in whitelist):
                     return
                 if any(word in message.content.lower() for word in unsupported):
-                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or anything that relates to fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                     await logging.send(embed=embed)
                     asyncio.sleep(15)
@@ -291,7 +291,7 @@ class lookingfor(commands.Cog):
                         return
     
         #looking for ranked NA
-        if message.channel.id == rankedNA:
+        if message.channel.id == rankedNA.id:
             if message.author.id == 706269652724219987:
                 return
             if 679879783630372865 in [role.id for role in message.author.roles]:
@@ -323,7 +323,7 @@ class lookingfor(commands.Cog):
                         return
 
         #looking for ranked EU
-        if message.channel.id == rankedEU:
+        if message.channel.id == rankedEU.id:
             if message.author.id == 706269652724219987:
                 return
             if 679879783630372865 in [role.id for role in message.author.roles]:
@@ -336,7 +336,7 @@ class lookingfor(commands.Cog):
                 if any(word in message.content.lower() for word in whitelist):
                     return
                 if any(word in message.content.lower() for word in unsupported):
-                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or anything that relates to fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                     await logging.send(embed=embed)
                     await asyncio.sleep(15)
@@ -355,7 +355,7 @@ class lookingfor(commands.Cog):
                         return
 
         #looking for normal Other
-        if message.channel.id == normalOther:
+        if message.channel.id == normalOther.id:
             if message.author.id == 706269652724219987:
                 return
             if 679879783630372865 in [role.id for role in message.author.roles]:
@@ -368,7 +368,7 @@ class lookingfor(commands.Cog):
                 if any(word in message.content.lower() for word in whitelist):
                     return
                 if any(word in message.content.lower() for word in unsupported):
-                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or anything that relates to fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                     await logging.send(embed=embed)
                     await asyncio.sleep(15)
@@ -387,7 +387,7 @@ class lookingfor(commands.Cog):
                         return
 
         #looking for ranked Other
-        if message.channel.id == rankedOther:
+        if message.channel.id == rankedOther.id:
             if message.author.id == 706269652724219987:
                 return
             if 679879783630372865 in [role.id for role in message.author.roles]:
@@ -400,7 +400,7 @@ class lookingfor(commands.Cog):
                 if any(word in message.content.lower() for word in whitelist):
                     return
                 if any(word in message.content.lower() for word in unsupported):
-                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or anything that relates to fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments or recruiting in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                     embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                     await logging.send(embed=embed)
                     await asyncio.sleep(15)
