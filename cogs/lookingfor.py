@@ -115,7 +115,7 @@ class lookingfor(commands.Cog):
         normalEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-EU"))
         rankedEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-EU"))
         normalOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-OTHER"))
-        rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED.OTHER"))
+        rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-OTHER"))
         if modrole not in ctx.author.roles:
             return
         else:
@@ -168,7 +168,7 @@ class lookingfor(commands.Cog):
         normalEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-EU"))
         rankedEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-EU"))
         normalOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-OTHER"))
-        rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED.OTHER"))
+        rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-OTHER"))
         if modrole not in ctx.author.roles:
             return
         else:
