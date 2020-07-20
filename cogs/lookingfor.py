@@ -6,6 +6,7 @@ import os
 import time
 import traceback
 import logging
+import shlex
 
 from discord.ext import commands
 from discord.ext.commands import BucketType
@@ -61,7 +62,7 @@ class lookingfor(commands.Cog):
             return
         else:
             if ctx.subcommand_passed is None:
-                await ctx.send("The following categories we have are:\n- normal\n- ranked\n- whitelist\nTo use the command, do the following ``!vfilter add <category> <word>``")
+                await ctx.send("The following categories we have are:\n- normal\n- ranked\n- unsupported\nTo use the command, do the following ``>filter add <category> <word>``")
     
     @filter.command()
     async def review(self, ctx, category: str):
@@ -79,13 +80,6 @@ class lookingfor(commands.Cog):
             message = await ctx.send("Working to fetch the list! This may take a few minutes.")
             pages = Configuration.paginate(", ".join(Configuration.getConfigVar(ctx.guild.id, "NONRANKED")))
             embed = discord.Embed(title=f"This is {category}'s list of words to keep an eye out on channels other than normal", description=f"```{pages}```", color=0xff7171)
-            await ctx.send(embed=embed)
-            await asyncio.sleep(5)
-            await message.delete()
-        if category == "whitelist":
-            message = await ctx.send("Working to fetch the list! This may take a few minutes.")
-            pages = Configuration.paginate(", ".join(Configuration.getConfigVar(ctx.guild.id, "WHITELIST")))
-            embed = discord.Embed(title=f"This is {category}'s list of words to keep an eye out for any false positives", description=f"```{pages}```", color=0xff7171)
             await ctx.send(embed=embed)
             await asyncio.sleep(5)
             await message.delete()
@@ -139,15 +133,6 @@ class lookingfor(commands.Cog):
                     await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out in any channel(s) other than {rankedNA.mention}, {rankedEU.mention}, and {rankedOther.mention}!")
                     Configuration.setConfigVar(ctx.guild.id, "RANKED", blacklist)
             
-            #Whitelist for any false positives
-            if category == "whitelist":
-                ignore = Configuration.getConfigVar(ctx.guild.id, "WHITELIST")
-                if word in ignore:
-                    await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out in {rankedNA.mention} | {rankedEU.mention} | {rankedOther.mention} and {normalNA.mention} | {normalEU.mention} | {normalOther.mention} in case of any false positives.")
-                else:
-                    ignore.append(word)
-                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out in {rankedNA.mention} | {rankedEU.mention} | {rankedOther.mention} and {normalNA.mention} | {normalEU.mention} | {normalOther.mention} in case of any false positives.")
-                    Configuration.setConfigVar(ctx.guild.id, "WHITELIST", ignore)
             #Unsupported related things
             if category == "unsupported":
                 blacklist = Configuration.getConfigVar(ctx.guild.id, "UNSUPPORTED")
@@ -191,16 +176,6 @@ class lookingfor(commands.Cog):
                     blacklist.remove(word)
                     await ctx.send(f"I have removed ``{word}`` to the list I will no longer keep an eye out in any channel(s) other than {rankedNA}, {rankedEU}, and {rankedOther} for {word}!")
                     Configuration.setConfigVar(ctx.guild.id, "RANKED", blacklist)
-            
-            #Whitelist for any false positives
-            if category == "whitelist":
-                ignore = Configuration.getConfigVar(ctx.guild.id, "WHITELIST")
-                if word not in ignore:
-                    await ctx.send(f"Looks like that ``{word}`` has been removed from the list for me to keep a eye out in {rankedNA} | {rankedEU} | {rankedOther} and {normalNA} | {normalEU} | {normalOther} in case of any false positives.")
-                else:
-                    ignore.remove(word)
-                    await ctx.send(f"I have removed ``{word}`` from the list for me to keep a eye out in {rankedNA} | {rankedEU} | {rankedOther} and {normalNA} | {normalEU} | {normalOther} in case of any false positives. I will no longer keep a eye out for {word}")
-                    Configuration.setConfigVar(ctx.guild.id, "WHITELIST", ignore)
 
             #Unsupported related things
             if category == "unsupported":
@@ -236,27 +211,26 @@ class lookingfor(commands.Cog):
                 return
             else:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
-                whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
-                if any(word in message.content.lower() for word in whitelist):
-                    return
-                if any(word in message.content.lower() for word in unsupported):
-                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
-                    await logging.send(embed=embed)
-                    await asyncio.sleep(15)
-                    await message.delete()
-                    await response.delete()
+                ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
+                split = shlex.split(message.content.lower())
+                for word in (w.lower() for w in unsupported):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
+                for word in (w.lower() for w in ranking):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{rankedNA.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
                 else:
-                    ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
-                    if any(word in message.content.lower() for word in ranking):
-                            response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{rankedNA.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                            embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
-                            await logging.send(embed=embed)
-                            await asyncio.sleep(15)
-                            await message.delete()
-                            await response.delete()
-                    else:
-                        return
+                    return
 
         #looking for normal EU
         if message.channel.id == normalEU.id: 
@@ -268,27 +242,26 @@ class lookingfor(commands.Cog):
                 return
             else:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
-                whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
-                if any(word in message.content.lower() for word in whitelist):
-                    return
-                if any(word in message.content.lower() for word in unsupported):
-                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
-                    await logging.send(embed=embed)
-                    asyncio.sleep(15)
-                    await message.delete()
-                    await response.delete()
+                ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
+                split = shlex.split(message.content.lower())
+                for word in (w.lower() for w in unsupported):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
+                for word in (w.lower() for w in ranking):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{rankedEU.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
                 else:
-                    ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
-                    if any(word in message.content.lower() for word in ranking):
-                            response = await message.channel.send(f"Hey there {message.author.mention}, seems like you may be looking for this channel :arrow_right: **{rankedEU.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")                       
-                            embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n{message.content}", color=0xff7171)
-                            await logging.send(embed=embed)
-                            await asyncio.sleep(15)
-                            await message.delete()
-                            await response.delete()
-                    else:
-                        return
+                    return
     
         #looking for ranked NA
         if message.channel.id == rankedNA.id:
@@ -300,27 +273,26 @@ class lookingfor(commands.Cog):
                 return
             else:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
-                whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
-                if any(word in message.content.lower() for word in whitelist):
-                    return
-                if any(word in message.content.lower() for word in unsupported):
-                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
-                    await logging.send(embed=embed)
-                    await asyncio.sleep(15)
-                    await message.delete()
-                    await response.delete()
+                ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
+                split = shlex.split(message.content.lower())
+                for word in (w.lower() for w in unsupported):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
+                for word in (w.lower() for w in ranking):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{normalNA.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
                 else:
-                    ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
-                    if any(word in message.content.lower() for word in ranking):
-                            response = await message.channel.send(f"{message.author.mention}, seems like you may be looking for this channel :arrow_right: **{normalNA.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                            embed = discord.Embed(title=f"Filtered Word from non-ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
-                            await logging.send(embed=embed)
-                            await asyncio.sleep(15)
-                            await message.delete()
-                            await response.delete()
-                    else:
-                        return
+                    return
 
         #looking for ranked EU
         if message.channel.id == rankedEU.id:
@@ -332,27 +304,26 @@ class lookingfor(commands.Cog):
                 return
             else:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
-                whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
-                if any(word in message.content.lower() for word in whitelist):
-                    return
-                if any(word in message.content.lower() for word in unsupported):
-                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
-                    await logging.send(embed=embed)
-                    await asyncio.sleep(15)
-                    await message.delete()
-                    await response.delete()
+                ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
+                split = shlex.split(message.content.lower())
+                for word in (w.lower() for w in unsupported):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
+                for word in (w.lower() for w in ranking):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{normalEU.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
                 else:
-                    ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
-                    if any(word in message.content.lower() for word in ranking):
-                            response = await message.channel.send(f"{message.author.mention}, seems like you may be looking for this channel :arrow_right: **{normalEU.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                            embed = discord.Embed(title=f"Filtered Word from non-ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
-                            await logging.send(embed=embed)
-                            await asyncio.sleep(15)
-                            await message.delete()
-                            await response.delete()
-                    else:
-                        return
+                    return
 
         #looking for normal Other
         if message.channel.id == normalOther.id:
@@ -364,27 +335,26 @@ class lookingfor(commands.Cog):
                 return
             else:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
-                whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
-                if any(word in message.content.lower() for word in whitelist):
-                    return
-                if any(word in message.content.lower() for word in unsupported):
-                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
-                    await logging.send(embed=embed)
-                    await asyncio.sleep(15)
-                    await message.delete()
-                    await response.delete()
+                ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
+                split = shlex.split(message.content.lower())
+                for word in (w.lower() for w in unsupported):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
+                for word in (w.lower() for w in ranking):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{rankedOther.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
                 else:
-                    ranking = Configuration.getConfigVar(message.guild.id, "RANKED")
-                    if any(word in message.content.lower() for word in ranking):
-                            response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{rankedOther.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                            embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
-                            await logging.send(embed=embed)
-                            await asyncio.sleep(15)
-                            await message.delete()
-                            await response.delete()
-                    else:
-                        return
+                    return
 
         #looking for ranked Other
         if message.channel.id == rankedOther.id:
@@ -396,29 +366,26 @@ class lookingfor(commands.Cog):
                 return
             else:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
-                whitelist = Configuration.getConfigVar(message.guild.id, "WHITELIST")
-                if any(word in message.content.lower() for word in whitelist):
-                    return
-                if any(word in message.content.lower() for word in unsupported):
-                    response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                    embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
-                    await logging.send(embed=embed)
-                    await asyncio.sleep(15)
-                    await message.delete()
-                    await response.delete()
+                ranking = Configuration.getConfigVar(message.guild.id, "UNRANKED")
+                split = shlex.split(message.content.lower())
+                for word in (w.lower() for w in unsupported):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
+                for word in (w.lower() for w in ranking):
+                    if word in split:
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{normalOther.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
                 else:
-                    ranking = Configuration.getConfigVar(message.guild.id, "NONRANKED")
-                    if any(word in message.content.lower() for word in ranking):
-                            response = await message.channel.send(f"{message.author.mention}, seems like you may be looking for this channel :arrow_right: **{normalOther.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
-                            embed = discord.Embed(title=f"Filtered Word from non-ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
-                            await logging.send(embed=embed)
-                            await asyncio.sleep(15)
-                            await message.delete()
-                            await response.delete()
-                    else:
-                        return
-        else:
-            return
+                    return
         
 
 def setup(bot):
