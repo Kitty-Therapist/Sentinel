@@ -29,7 +29,6 @@ CONFIG_TEMPLATE = {
     "CENSOR": [],
     "RANKED": [],
     "NONRANKED": [],
-    "WHITELIST": [],
     "UNSUPPORTED": []
 }
 
