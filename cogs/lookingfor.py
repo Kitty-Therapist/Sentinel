@@ -77,7 +77,7 @@ class lookingfor(commands.Cog):
             await message.delete()
         if category == "normal":
             message = await ctx.send("Working to fetch the list! This may take a few minutes.")
-            pages = Configuration.paginate(", ".join(Configuration.getConfigVar(ctx.guild.id, "NORMAL")))
+            pages = Configuration.paginate(", ".join(Configuration.getConfigVar(ctx.guild.id, "NONRANKED")))
             embed = discord.Embed(title=f"This is {category}'s list of words to keep an eye out on channels other than normal", description=f"```{pages}```", color=0xff7171)
             await ctx.send(embed=embed)
             await asyncio.sleep(5)
