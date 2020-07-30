@@ -26,10 +26,12 @@ CONFIG_TEMPLATE = {
     "PULLROOMLOG": 0,
     "MODROLE": 0,
     "LOGGING": 0,
-    "CENSOR": [],
+    "EMERGENCY": 0,
     "RANKED": [],
     "NONRANKED": [],
-    "UNSUPPORTED": []
+    "UNSUPPORTED": [],
+    "CENSOR": [],
+    "NONEMERGENCY": []
 }
 
 def initialize(bot):
