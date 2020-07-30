@@ -1,11 +1,41 @@
 import json
 import aiohttp
 import asyncio
+import discord
 import async_timeout
 import datetime
 import random
 from discord.ext import commands
-from discord import utils
+from discord import utils, NotFound
+
+THUMBSUP = '<:check:738415743086887004>'
+
+
+async def confirm_command(ctx, msg, timeout=30.0, on_yes=None):
+    if isinstance(msg, str):
+        msg = await ctx.send(msg)
+    await msg.add_reaction(THUMBSUP)
+    
+    def check(reaction, user):
+        return reaction.message.id == msg.id and user == ctx.author
+
+    try:
+        react, _ = await ctx.bot.wait_for(
+            'reaction_add',
+            check=check,
+            timeout=timeout
+        )
+        if str(react.emoji) == THUMBSUP and on_yes:
+            await on_yes()
+    except asyncio.TimeoutError:
+        try:
+            await msg.delete()
+        except discord.NotFound:
+            pass
+        else:
+            await ctx.message.delete()
+    else:
+        return
 
 def convertToSeconds(value: int, type: str):
     type = type.lower()
