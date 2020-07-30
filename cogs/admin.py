@@ -27,6 +27,25 @@ class admin(commands.Cog):
                 await ctx.send(embed=embed)
         else:
             return
+
+    @commands.guild_only()
+    @configure.command()
+    async def emergencyrole(self, ctx: commands.Context, *, role: discord.Role):
+        if role is None:
+            embed=discord.Embed(title="Error on Setting Emergency Role", description=":warning: I was not able to add the roleID that you specified, please make sure that the role that you are trying to specify exists.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            await ctx.send(embed=embed)
+        else:
+            try:
+                Configuration.setConfigVar(ctx.guild.id, "EMERGENCY", role.id)
+                embed = discord.Embed(colour=discord.Colour(0x77dd77),title='Emergency Role Successfully Set!', description=f"{role.mention} has been successfully added as Emergency role",timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)
+            except (BadArgument) as ex:
+                embed=discord.Embed(title="Invalid Role on Setting Emergency Role", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid roleID, please make sure to provide me with the correct roleID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)
+
     
     @commands.guild_only()
     @configure.command()
@@ -225,17 +244,23 @@ class admin(commands.Cog):
                 embed=discord.Embed(title="Invalid Channel on Setting Logging Channel", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid channelID, please make sure to provide me with the correct channelID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                 await ctx.send(embed=embed)  
-                
+
     @commands.guild_only()
-    @configure.command()
-    async def censor(self, ctx: commands.Context, *, word:str):
-        blacklist = Configuration.getConfigVar(ctx.guild.id, "CENSOR")
-        if word in blacklist:
-            await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
+    @commands.command()
+    async def notemergency(self, ctx: commands.Context, *, word: str):
+        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
+        if modrole not in ctx.author.roles:
+            return
         else:
-            blacklist.append(word)
-            await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
-            Configuration.setConfigVar(ctx.guild.id, "CENSOR", blacklist)
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "NONEMERGENCY")
+            if word in blacklist:
+                blacklist.remove(word)
+                await ctx.send(f"I have removed ``{word}`` from the list I will no longer keep an eye out in any future Emergency role usage!")
+                Configuration.setConfigVar(ctx.guild.id, "NONEMERGENCY", blacklist)
+            else: 
+                blacklist.append(word)
+                await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out in any future Emergency role usage!")
+                Configuration.setConfigVar(ctx.guild.id, "NONEMERGENCY", blacklist)
 
 
 def setup(bot):
