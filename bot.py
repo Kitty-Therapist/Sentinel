@@ -29,6 +29,9 @@ TOKEN = "bot token"
 @bot.event
 async def on_command_error(ctx: commands.Context, error):
     logs = bot.get_channel(712640778136059975)
+    if isinstance(error, commands.CommandOnCooldown):        
+        await ctx.send_message(ctx.message.channel, content="It looks like that someone has used the emergency ping recently. Please wait for a bit before trying again, if it's urgent then please contact the mods at <@711678018573303809>" % error.retry_after)
+        raise error
     if isinstance(error, commands.NoPrivateMessage):
         await ctx.send("This bot command is not meant for private messages!")
     elif isinstance(error, commands.BotMissingPermissions):
