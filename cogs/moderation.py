@@ -89,7 +89,7 @@ class moderation(commands.Cog):
             return
         
         if any(word in reason.lower() for word in bademergency):
-            embed6=discord.Embed(title="Invalid Emergency Reason!", description=f"Hmmmm... Seems like you did not provide the valid reason for me to ping the emergency role. Here are the list of valid reasons to ping Emergency role!\n\n- Raid\n- NSFW content (porngraphy or gore)", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed6=discord.Embed(title="Invalid Emergency Reason!", description=f"Hmmmm... Seems like you did not provide the valid reason for me to ping the emergency role. Here are the list of valid reasons to ping Emergency role, if you still believe that this is something that would require the moderators' attention then please contact our modmail at <@711678018573303809>!\n\n- Raid\n- NSFW content (porngraphy or gore)", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             baduser = await ctx.send(embed=embed6)
             await asyncio.sleep(15)
             await baduser.delete()
@@ -110,7 +110,7 @@ class moderation(commands.Cog):
                 embed4=discord.Embed(title="Emergency Situation!", description=f"{ctx.author.mention} ({ctx.author.name}#{ctx.author.discriminator} (``{ctx.author.id}``) has pinged the Emergency role for ``{reason}``.", color=0xff9494, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 await ctx.send(embed=embed4)
                 
-        embed2=discord.Embed(title="Emergency Ping Warning", description=f"Are you ABSOLUTELY sure that you want to ping the Emergency role for this reason: ``{reason}``?\n\nMake sure that the reason that you are pinging the emergency role meets the following:\n\n- Major raid\n- NSFW content in channel", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+        embed2=discord.Embed(title="Emergency Ping Warning", description=f"Are you ABSOLUTELY sure that you want to ping the Emergency role for this reason: ``{reason}``?\n\nMake sure that the reason that you are pinging the emergency role meets the following (if it does not meet the following requirements but you feel like you need the moderators' attention, please contact us at <@711678018573303809>.) :\n\n- Major raid\n- NSFW content in channel", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
         msg = await ctx.send(embed=embed2)
         await confirm_command(ctx, msg, on_yes=yes)
     
