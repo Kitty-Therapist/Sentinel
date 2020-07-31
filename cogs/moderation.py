@@ -117,6 +117,7 @@ class moderation(commands.Cog):
 
     #This allows the moderator to pull the user into a private channel to discuss with them.
     
+    @commands.command()
     @commands.guild_only()
     @commands.bot_has_permissions(manage_roles=True)
     async def pull(self, ctx: commands.Context, member: discord.User, *, reason=""):
