@@ -21,8 +21,8 @@ class moderation(commands.Cog):
     def __init__(self, bot):
         pass
 
-    #@commands.Cog.listener()
-    #async def on_message(self, message):
+    @commands.Cog.listener()
+    async def on_message(self, message):
     #    censor = Configuration.getConfigVar(message.guild.id, "CENSOR")
     #    split = shlex.split(message.content.lower())
     #    reaction = ["👍", "👎"]
