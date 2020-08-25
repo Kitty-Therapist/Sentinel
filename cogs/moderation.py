@@ -23,6 +23,7 @@ class moderation(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        split = shlex.split(message.content.lower())
     #    censor = Configuration.getConfigVar(message.guild.id, "CENSOR")
     #    split = shlex.split(message.content.lower())
     #    reaction = ["👍", "👎"]
@@ -64,14 +65,17 @@ class moderation(commands.Cog):
                 return
             else:
                 censor = Configuration.getConfigVar(message.guild.id, "CENSOR")
-                if any(word in message.content.lower() for word in censor):
-                    response = await message.channel.send(f"Do not send any inappropriate language or non-permitted domains.")
-                    logging = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "LOGGING"))
-                    embed = discord.Embed(title=f"Filtered Message in Censor", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing :\n\n```{message.content}```", color=0xff7171)
-                    await logging.send(embed=embed)
-                    await asyncio.sleep(15)
-                    await message.delete()
-                    await response.delete()
+                for word in (w.lower() for w in censor):
+                    if word in split:
+                        response = await message.channel.send(f"Do not send any inappropriate language or non-permitted domains.")
+                        logging = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "LOGGING"))
+                        embed = discord.Embed(title=f"Filtered Message in Censor", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing ``{word}``:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(embed=embed)
+                        await asyncio.sleep(15)
+                        await message.delete()
+                        await response.delete()
+                    else:
+                        return
         else:
             return  
 
