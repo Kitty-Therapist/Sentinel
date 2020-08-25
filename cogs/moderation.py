@@ -69,7 +69,7 @@ class moderation(commands.Cog):
                     logging = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "LOGGING"))
                     embed = discord.Embed(title=f"Filtered Message in Censor", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                     await logging.send(embed=embed)
-                    asyncio.sleep(15)
+                    await asyncio.sleep(15)
                     await message.delete()
                     await response.delete()
         else:
