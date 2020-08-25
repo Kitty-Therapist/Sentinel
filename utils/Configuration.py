@@ -73,7 +73,7 @@ def loadConfig(guild:discord.Guild):
                     config[key] = CONFIG_TEMPLATE[key]
             SERVER_CONFIGS[id] = config
     except FileNotFoundError:
-        print(f"No config available for {guild.name} ({id}), creating blank one.")
+        print(f"No config available for {name} ({id}), creating blank one.")
         SERVER_CONFIGS[id] = copy.deepcopy(CONFIG_TEMPLATE)
         saveConfig(id)
 
