@@ -23,7 +23,6 @@ class moderation(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        split = shlex.split(message.content.lower())
     #    censor = Configuration.getConfigVar(message.guild.id, "CENSOR")
     #    split = shlex.split(message.content.lower())
     #    reaction = ["👍", "👎"]
@@ -64,6 +63,7 @@ class moderation(commands.Cog):
             if 695765776086597663 in [role.id for role in message.author.roles]:
                 return
             else:
+                split = shlex.split(message.content.lower())
                 censor = Configuration.getConfigVar(message.guild.id, "CENSOR")
                 for word in (w.lower() for w in censor):
                     if word in split:
