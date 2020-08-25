@@ -26,15 +26,15 @@ class moderation(commands.Cog):
         if member.guild.id == 679875946597056683:
             if before.channel != after.channel:
                 if before.channel is None:
-                    log = await member.guild.get_channel(683064390068600862)
+                    log = member.guild.get_channel(683064390068600862)
                     embed=discord.Embed(title="Voice Join", description=f"{member.name}#{member.discriminator} ({member.mention}) - (``{member.id}``) joined {after.channel.mention}", color=0x5da862, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     await log.send(embed=embed)
                 elif after.channel is None:
-                    log = await member.guild.get_channel(683064390068600862)
+                    log = member.guild.get_channel(683064390068600862)
                     embed2=discord.Embed(title="Voice Leave", description=f"{member.name}#{member.discriminator} ({member.mention}) - (``{member.id}``) left {before.channel.mention}", color=0xd24141, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     await log.send(embed=embed2)
                 else:
-                    log = await member.guild.get_channel(683064390068600862)
+                    log = member.guild.get_channel(683064390068600862)
                     embed3=discord.Embed(title="Voice Switch", description=f"{member.name}#{member.discriminator} ({member.mention}) - (``{member.id}``) switched from {before.channel.mention} to {after.channel.mention}", color=0xe4c367, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     await log.send(embed=embed3)
         else:       
