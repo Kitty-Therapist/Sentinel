@@ -63,19 +63,15 @@ class moderation(commands.Cog):
             if 695765776086597663 in [role.id for role in message.author.roles]:
                 return
             else:
-                #split = shlex.split(message.content.lower())
                 censor = Configuration.getConfigVar(message.guild.id, "CENSOR")
-                for word in (w.lower() for w in censor):
-                    if word in censor:
-                        response = await message.channel.send(f"Do not send any inappropriate language or non-permitted domains.")
-                        logging = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "LOGGING"))
-                        embed = discord.Embed(title=f"Filtered Message in Censor", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing ``{word}``:\n\n```{message.content}```", color=0xff7171)
-                        await logging.send(embed=embed)
-                        await asyncio.sleep(15)
-                        await message.delete()
-                        await response.delete()
-                    else:
-                        return
+                if any(word in message.content.lower() for word in censor):
+                    response = await message.channel.send(f"Do not send any inappropriate language or non-permitted domains.")
+                    logging = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "LOGGING"))
+                    embed = discord.Embed(title=f"Filtered Message in Censor", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
+                    await logging.send(embed=embed)
+                    asyncio.sleep(15)
+                    await message.delete()
+                    await response.delete()
         else:
             return  
 
