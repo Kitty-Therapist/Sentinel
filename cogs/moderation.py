@@ -66,7 +66,7 @@ class moderation(commands.Cog):
                 censor = Configuration.getConfigVar(message.guild.id, "CENSOR")
                 if any(word in message.content.lower() for word in censor):
                     response = await message.channel.send(f"Please do not send messages containing any of the censored words / invites.")
-                    logging = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "PULLROOMLOG"))
+                    logging = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "LOGGING"))
                     embed = discord.Embed(title=f"Filtered Message in Censor", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing:\n\n```{message.content}```", color=0xff7171)
                     await logging.send(embed=embed)
                     asyncio.sleep(15)
