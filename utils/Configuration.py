@@ -62,20 +62,19 @@ def loadGlobalConfig():
         print(e)
         raise e
 
-
-def loadConfig(guild:discord.Guild):
+def loadConfig(guildId):
     global SERVER_CONFIGS
     try:
-        with open(f'config/{guild.id}.json', 'r') as jsonfile:
+        with open(f'config/{guildId}.json', 'r') as jsonfile:
             config = json.load(jsonfile)
             for key in CONFIG_TEMPLATE:
                 if key not in config:
                     config[key] = CONFIG_TEMPLATE[key]
-            SERVER_CONFIGS[guild.id] = config
+            SERVER_CONFIGS[guildId] = config
     except FileNotFoundError:
-        print(f"No config available for {guild.name} ({guild.id}), creating blank one.")
-        SERVER_CONFIGS[guild.id] = copy.deepcopy(CONFIG_TEMPLATE)
-        saveConfig(guild.id)
+        print(f"No config available for Guild ({guildId}), creating blank one.")
+        SERVER_CONFIGS[guildId] = copy.deepcopy(CONFIG_TEMPLATE)
+        saveConfig(guildId)
 
 def getConfigVar(id, key):
     if id not in SERVER_CONFIGS.keys():
