@@ -65,7 +65,7 @@ class moderation(commands.Cog):
             else:
                 split = shlex.split(message.content.lower())
                 censor = Configuration.getConfigVar(message.guild.id, "CENSOR")
-                for word in (w.lower() for w in unsupported):
+                for word in (w.lower() for w in censor):
                     if word in split:
                         response = await message.channel.send(f"Do not send any inappropriate language or non-permitted domains.")
                         logging = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "LOGGING"))
