@@ -49,39 +49,44 @@ class moderation(commands.Cog):
         fake = message.guild.get_role(Configuration.getConfigVar(message.guild.id, "FAKEEMERGENCY"))
         time_difference = (datetime.datetime.utcnow() - self.last_timeStamp).total_seconds()
         if message.guild.id == 679875946597056683:
-            if fake.mention in message.content:
-                if time_difference < 600:
-                    cool = await message.channel.send("It looks like that someone has used the emergency ping recently. Please wait for a bit before trying again, if it's urgent then please contact the mods at <@711678018573303809>")
-                    await asyncio.sleep(15)
-                    await message.delete()
-                    await cool.delete()
-                else:
-                    if any(word in message.content.lower() for word in censor):
-                        embed6=discord.Embed(title="Invalid Emergency Reason!", description=f"Hmmmm... Seems like you did not provide the valid reason for me to ping the emergency role. Here are the list of valid reasons to ping Emergency role, if you still believe that this is something that would require the moderators' attention then please contact our modmail at <@711678018573303809>!\n\n- Raid\n- NSFW content (porngraphy or gore)", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-                        response = await message.channel.send(embed=embed6)
+            if 684144438251225099 in [role.id for role in message.author.roles]:
+                return
+            if message.author.id == 706269652724219987:
+                return
+            else:
+                if fake.mention in message.content:
+                    if time_difference < 600:
+                        cool = await message.channel.send("It looks like that someone has used the emergency ping recently. Please wait for a bit before trying again, if it's urgent then please contact the mods at <@711678018573303809>")
                         await asyncio.sleep(15)
                         await message.delete()
-                        await response.delete()
-                        return
+                        await cool.delete()
                     else:
-                        async def yes():
-                            if emergencyrole is None:
-                                embed3=discord.Embed(title="Unconfigured Emergency role!", description=f"Hmmmm... Seems like the emergency role is not configured. Please contact the mods over at the Modmail at <@711678018573303809>", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-                                riprole = await message.channel.send(embed=embed3)
-                                await asyncio.sleep(15)
-                                await riprole.delete()
-                                await message.delete()
-                                return
-                            else:
-                                await message.channel.send(f"{emergencyrole.mention}, someone needs your assistance. Please ensure that this matter is solved appropriately.")
-                                embed4=discord.Embed(title="Emergency Situation!", description=f"{message.author.mention} ({message.author.name}#{message.author.discriminator} (``{message.author.id}``) has pinged the Emergency role with ``{message.content}``.", color=0xff9494, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-                                await message.channel.send(embed=embed4)
-                                self.last_timeStamp = datetime.datetime.utcnow()
-                        embed = discord.Embed(title="You are about to ping the Emergency role", description="By pinging the Emergency role, you are about to summon our moderation team. **Are you sure that you are using the Emergency ping for the following reasons:**\n\n- Raid\n\n- Major spam\n\n- NSFW content", color=0xff7171)
-                        msg = await message.channel.send(embed=embed)
-                        await confirm_command2(self, message, msg, on_yes=yes)
-            else:
-                 return
+                        if any(word in message.content.lower() for word in censor):
+                            embed6=discord.Embed(title="Invalid Emergency Reason!", description=f"Hmmmm... Seems like you did not provide the valid reason for me to ping the emergency role. Here are the list of valid reasons to ping Emergency role, if you still believe that this is something that would require the moderators' attention then please contact our modmail at <@711678018573303809>!\n\n- Raid\n- NSFW content (porngraphy or gore)", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                            response = await message.channel.send(embed=embed6)
+                            await asyncio.sleep(15)
+                            await message.delete()
+                            await response.delete()
+                            return
+                        else:
+                            async def yes():
+                                if emergencyrole is None:
+                                    embed3=discord.Embed(title="Unconfigured Emergency role!", description=f"Hmmmm... Seems like the emergency role is not configured. Please contact the mods over at the Modmail at <@711678018573303809>", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                                    riprole = await message.channel.send(embed=embed3)
+                                    await asyncio.sleep(15)
+                                    await riprole.delete()
+                                    await message.delete()
+                                    return
+                                else:
+                                    await message.channel.send(f"{emergencyrole.mention}, someone needs your assistance. Please ensure that this matter is solved appropriately.")
+                                    embed4=discord.Embed(title="Emergency Situation!", description=f"{message.author.mention} ({message.author.name}#{message.author.discriminator} (``{message.author.id}``) has pinged the Emergency role with ``{message.content}``.", color=0xff9494, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                                    await message.channel.send(embed=embed4)
+                                    self.last_timeStamp = datetime.datetime.utcnow()
+                            embed = discord.Embed(title="You are about to ping the Emergency role", description="By pinging the Emergency role, you are about to summon our moderation team. **Are you sure that you are using the Emergency ping for the following reasons:**\n\n- Raid\n\n- Major spam\n\n- NSFW content", color=0xff7171)
+                            msg = await message.channel.send(embed=embed)
+                            await confirm_command2(self, message, msg, on_yes=yes)
+                else:
+                    return
         else:
             return
 
