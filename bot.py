@@ -24,13 +24,16 @@ initial_extensions = ['lookingfor', 'moderation', 'admin']
 if not os.path.exists('config'):
     os.makedirs('config')
 
-TOKEN = "bot token"
+TOKEN = "token"
 
 @bot.event
 async def on_command_error(ctx: commands.Context, error):
     logs = bot.get_channel(712640778136059975)
     if isinstance(error, commands.CommandOnCooldown):        
-        await ctx.send(ctx.message.channel, content="It looks like that someone has used the emergency ping recently. Please wait for a bit before trying again, if it's urgent then please contact the mods at <@711678018573303809>" % error.retry_after)
+        cool = await ctx.send("It looks like that someone has used the emergency ping recently. Please wait for a bit before trying again, if it's urgent then please contact the mods at <@711678018573303809>")
+        await asyncio.sleep(15)
+        await cool.delete()
+        await ctx.message.delete()
         raise error
     if isinstance(error, commands.NoPrivateMessage):
         await ctx.send("This bot command is not meant for private messages!")
@@ -137,7 +140,7 @@ async def on_ready():
         embed = discord.Embed(colour=discord.Colour(0x77dd77),title='Successfully connected to the gateway', description=f"{bot.user.name} has connected to the gateway!",timestamp=datetime.datetime.utcfromtimestamp(time.time()))
         await logs.send(embed=embed)
         print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}' + f'\nVersion: {discord.__version__}\n')
-        await bot.change_presence(activity=discord.Activity(name='Looking for category', type=discord.ActivityType.watching))
+        await bot.change_presence(activity=discord.Activity(name='VALORANT', type=discord.ActivityType.watching))
 
 bot.run(TOKEN)
 

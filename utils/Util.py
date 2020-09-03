@@ -37,6 +37,33 @@ async def confirm_command(ctx, msg, timeout=30.0, on_yes=None):
     else:
         return
 
+async def confirm_command2(self, message, msg, timeout=30.0, on_yes=None):
+    if isinstance(msg, str):
+        msg = await message.channel.send(msg)
+    await msg.add_reaction(THUMBSUP)
+    
+    def check(reaction, user):
+        return reaction.message.id == msg.id and user == message.author
+
+    try:
+        react, _ = await self.bot.wait_for(
+            'reaction_add',
+            check=check,
+            timeout=timeout
+        )
+        if str(react.emoji) == THUMBSUP and on_yes:
+            await on_yes()
+    except asyncio.TimeoutError:
+        try:
+            await msg.delete()
+        except discord.NotFound:
+            pass
+        else:
+            await message.delete()
+    else:
+        return
+
+
 def convertToSeconds(value: int, type: str):
     type = type.lower()
     if len(type) > 1 and type[-1:] == 's': # plural -> singular

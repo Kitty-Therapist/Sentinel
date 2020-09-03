@@ -27,6 +27,7 @@ CONFIG_TEMPLATE = {
     "MODROLE": 0,
     "LOGGING": 0,
     "EMERGENCY": 0,
+    "FAKEEMERGENCY": 0,
     "RANKED": [],
     "NONRANKED": [],
     "UNSUPPORTED": [],

@@ -9,7 +9,7 @@ import logging
 import shlex
 
 from discord.ext import commands
-from discord.ext.commands import BucketType
+from discord.ext.commands import BucketType, NotFound
 from discord import abc
 from discord.abc import PrivateChannel
 from discord.utils import get
@@ -200,6 +200,19 @@ class lookingfor(commands.Cog):
         rankedOther = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "RANKED-OTHER"))
         logging = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "LOGGING"))
         modmail = "<@711678018573303809>"
+
+        if normalNA is None:
+            return
+        if rankedNA is None:
+            return
+        if normalEU is None:
+            return
+        if rankedEU is None:
+            return
+        if normalOther is None:
+            return
+        if rankedOther is None:
+            return
         
 
         #looking for normal NA
@@ -218,6 +231,7 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
                         await message.delete()
@@ -226,10 +240,15 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{rankedNA.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
-                        await message.delete()
-                        await response.delete()
+                        try:
+                            await message.delete()
+                        except NotFound as e:
+                            await response.delete()
+                        else:
+                            await response.delete()
                 else:
                     return
 
@@ -249,6 +268,7 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
                         await message.delete()
@@ -257,10 +277,15 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{rankedEU.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
-                        await message.delete()
-                        await response.delete()
+                        try:
+                            await message.delete()
+                        except NotFound as e:
+                            await response.delete()
+                        else:
+                            await response.delete()
                 else:
                     return
     
@@ -280,6 +305,7 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
                         await message.delete()
@@ -288,10 +314,15 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{normalNA.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
-                        await message.delete()
-                        await response.delete()
+                        try:
+                            await message.delete()
+                        except NotFound as e:
+                            await response.delete()
+                        else:
+                            await response.delete()
                 else:
                     return
 
@@ -311,6 +342,7 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
                         await message.delete()
@@ -319,10 +351,15 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{normalEU.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
-                        await message.delete()
-                        await response.delete()
+                        try:
+                            await message.delete()
+                        except NotFound as e:
+                            await response.delete()
+                        else:
+                            await response.delete()
                 else:
                     return
 
@@ -342,6 +379,7 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
                         await message.delete()
@@ -350,35 +388,17 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{rankedOther.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **word**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
-                        await message.delete()
-                        await response.delete()
+                        try:
+                            await message.delete()
+                        except NotFound as e:
+                            await response.delete()
+                        else:
+                            await response.delete()
                 else:
                     return
-
-        #if message.author.id == 706269652724219987:
-        #    return
-        #if 679879783630372865 in [role.id for role in message.author.roles]:
-        #    return
-        #if 684144438251225099 in [role.id for role in message.author.roles]:
-        #    return
-        #if 703063141990400001 in [role.id for role in message.author.roles]:
-        #    return
-        #if 695765776086597663 in [role.id for role in message.author.roles]:
-        #    return
-        #else:
-        #    split = shlex.split(message.content.lower())
-        #    censor = Configuration.getConfigVar(message.guild.id, "CENSOR")
-        #    for word in (w.lower() for w in censor):
-        #        if word in split:
-        #            response = await message.channel.send(f"{message.author.mention}, do not send any inappropriate language or non-permitted domains.")
-        #            logging = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "LOGGING"))
-        #            embed = discord.Embed(title=f"Filtered Message in Censor", description=f"Found message from {message.author.name}#{message.author.discriminator} (``{message.author.id}``) in {message.channel.mention} containing ``{word}``:\n\n```{message.content}```", color=0xff7171)
-        #            await logging.send(embed=embed)
-        #            await asyncio.sleep(15)
-        #            await message.delete()
-        #            await response.delete()
         
         #looking for ranked Other
         if message.channel.id == rankedOther.id:
@@ -396,6 +416,7 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
                         await message.delete()
@@ -404,14 +425,18 @@ class lookingfor(commands.Cog):
                     if word in split:
                         response = await message.channel.send(f"Hey there {message.author.mention}, I believe you may be looking for this channel :arrow_right: **{normalOther.mention}** :arrow_left:\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
+                        await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         await asyncio.sleep(15)
-                        await message.delete()
-                        await response.delete()
+                        try:
+                            await message.delete()
+                        except NotFound as e:
+                            await response.delete()
+                        else:
+                            await response.delete()
                 else:
                     return
-           
-        
+                 
 
 def setup(bot):
     bot.add_cog(lookingfor(bot))
