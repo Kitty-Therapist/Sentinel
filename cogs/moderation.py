@@ -162,12 +162,6 @@ class moderation(commands.Cog):
         embed2=discord.Embed(title="Emergency Ping Warning", description=f"Are you ABSOLUTELY sure that you want to ping the Emergency role for this reason: ``{reason}``?\n\nMake sure that the reason that you are pinging the emergency role meets the following (if it does not meet the following requirements but you feel like you need the moderators' attention, please contact us at <@711678018573303809>.) :\n\n- Major raid\n- NSFW content in channel", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
         msg = await ctx.send(embed=embed2)
         await confirm_command(ctx, msg, on_yes=yes)
-    
-    @commands.command()
-    @commands.guild_only()
-    async def bottest(self, ctx: commands.Context):
-        await ctx.send("/rank")
-
 
     #This allows the moderator to pull the user into a private channel to discuss with them.
     
