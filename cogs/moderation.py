@@ -56,6 +56,13 @@ class moderation(commands.Cog):
             if message.author.id == 706269652724219987:
                 return
             else:
+                if "ᴡɪʟʟɪɴɢ ᴛᴏ ꜱʜᴏᴡ ᴀᴄᴄᴏᴜɴᴛ ɪɴ ᴀ ᴄᴀʟʟ ᴀᴅᴅ ᴍᴇ ɪɴ ᴅɪꜱᴄᴏʀᴅ ɪɴ ᴄᴀꜱᴇ ɪ ɢᴇᴛ ʙᴀɴɴᴇᴅ ᴏɴ ᴛʜᴇ ꜱᴇʀᴠᴇʀ" in message.content:
+                    user = message.author
+                    role = discord.utils.get(user.guild.roles, id=683927402530734090)
+                    await message.author.add_roles(role)
+                    await message.delete()
+                    spam=discord.Embed(title="Account Seller Spam found", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted** to sell their account by spamming their stuff everywhere. Here is the context. ```{message.content}```", color=0xff7171)
+                    await logging.send(embed=spam)
                 if fake.mention == message.content:
                     embed6=discord.Embed(title="Invalid Emergency Reason!", description=f"Hmmmm... Seems like you did not provide any reason for me to ping the emergency role. Here are the list of valid reasons to ping Emergency role, if you still believe that this is something that would require the moderators' attention then please contact our modmail at <@711678018573303809>!\n\n- Raid\n- NSFW content (porngraphy or gore)", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     response = await message.channel.send(embed=embed6)
@@ -162,7 +169,7 @@ class moderation(commands.Cog):
         embed2=discord.Embed(title="Emergency Ping Warning", description=f"Are you ABSOLUTELY sure that you want to ping the Emergency role for this reason: ``{reason}``?\n\nMake sure that the reason that you are pinging the emergency role meets the following (if it does not meet the following requirements but you feel like you need the moderators' attention, please contact us at <@711678018573303809>.) :\n\n- Major raid\n- NSFW content in channel", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
         msg = await ctx.send(embed=embed2)
         await confirm_command(ctx, msg, on_yes=yes)
-
+    
     #This allows the moderator to pull the user into a private channel to discuss with them.
     
     @commands.command()
