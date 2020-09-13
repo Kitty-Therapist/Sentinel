@@ -163,6 +163,11 @@ class moderation(commands.Cog):
         msg = await ctx.send(embed=embed2)
         await confirm_command(ctx, msg, on_yes=yes)
     
+    @commands.command()
+    @commands.guild_only()
+    async def bottest(self, ctx: commands.Context):
+        await ctx.send("/rank")
+
 
     #This allows the moderator to pull the user into a private channel to discuss with them.
     
