@@ -57,8 +57,7 @@ class moderation(commands.Cog):
                 return
             else:
                 if "ᴡɪʟʟɪɴɢ ᴛᴏ ꜱʜᴏᴡ ᴀᴄᴄᴏᴜɴᴛ ɪɴ ᴀ ᴄᴀʟʟ ᴀᴅᴅ ᴍᴇ ɪɴ ᴅɪꜱᴄᴏʀᴅ ɪɴ ᴄᴀꜱᴇ ɪ ɢᴇᴛ ʙᴀɴɴᴇᴅ ᴏɴ ᴛʜᴇ ꜱᴇʀᴠᴇʀ" in message.content:
-                    user = message.author
-                    role = discord.utils.get(user.guild.roles, id=683927402530734090)
+                    role = discord.utils.get(message.author.guild.roles, id=683927402530734090)
                     await message.author.add_roles(role)
                     await message.delete()
                     spam=discord.Embed(title="Account Seller Spam found", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted** to sell their account by spamming their stuff everywhere. Here is the context. ```{message.content}```", color=0xff7171)
