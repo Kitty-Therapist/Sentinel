@@ -56,7 +56,7 @@ class moderation(commands.Cog):
             if message.author.id == 706269652724219987:
                 return
             else:
-                if "ᴡɪʟʟɪɴɢ ᴛᴏ ꜱʜᴏᴡ ᴀᴄᴄᴏᴜɴᴛ ɪɴ ᴀ ᴄᴀʟʟ ᴀᴅᴅ ᴍᴇ ɪɴ ᴅɪꜱᴄᴏʀᴅ ɪɴ ᴄᴀꜱᴇ ɪ ɢᴇᴛ ʙᴀɴɴᴇᴅ ᴏɴ ᴛʜᴇ ꜱᴇʀᴠᴇʀ" in message.content:
+                if "𝐒𝐞𝐥𝐥𝐢𝐧𝐠 𝐍𝐀 𝐚𝐜𝐜𝐨𝐮𝐧𝐭 𝐰𝐢𝐭𝐡 𝟏𝟑𝟐𝟎𝟎 𝐕𝐚𝐥𝐨𝐫𝐚𝐧𝐭 𝐩𝐨𝐢𝐧𝐭𝐬" in message.content:
                     role = discord.utils.get(message.author.guild.roles, id=683927402530734090)
                     await message.author.add_roles(role)
                     await message.delete()
