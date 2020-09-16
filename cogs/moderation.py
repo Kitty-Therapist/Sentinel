@@ -62,6 +62,12 @@ class moderation(commands.Cog):
                     await message.delete()
                     spam=discord.Embed(title="Account Seller Spam found", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted** to sell their account by spamming their stuff everywhere. Here is the context. ```{message.content}```", color=0xff7171)
                     await logging.send(embed=spam)
+                if "𝚂𝚎𝚕𝚕𝚒𝚗𝚐 𝙽𝙰 𝚊𝚌𝚌𝚘𝚞𝚗𝚝 𝚠𝚒𝚝𝚑 𝟷𝟹𝟸𝟶𝟶 𝚅𝚊𝚕𝚘𝚛𝚊𝚗𝚝 𝚙𝚘𝚒𝚗𝚝𝚜" in message.content:
+                    role = discord.utils.get(message.author.guild.roles, id=683927402530734090)
+                    await message.author.add_roles(role)
+                    await message.delete()
+                    spam=discord.Embed(title="Account Seller Spam found", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted** to sell their account by spamming their stuff everywhere. Here is the context. ```{message.content}```", color=0xff7171)
+                    await logging.send(embed=spam)
                 if fake.mention == message.content:
                     embed6=discord.Embed(title="Invalid Emergency Reason!", description=f"Hmmmm... Seems like you did not provide any reason for me to ping the emergency role. Here are the list of valid reasons to ping Emergency role, if you still believe that this is something that would require the moderators' attention then please contact our modmail at <@711678018573303809>!\n\n- Raid\n- NSFW content (porngraphy or gore)", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     response = await message.channel.send(embed=embed6)
