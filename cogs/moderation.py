@@ -22,25 +22,6 @@ class moderation(commands.Cog):
         self.bot = bot
         self.last_timeStamp = datetime.datetime.utcfromtimestamp(0)
     
-    #@commands.Cog.listener()
-    #async def on_voice_state_update(self, member, before, after):
-    #    if member.guild.id == 679875946597056683:
-    #        if before.channel != after.channel:
-    #            if before.channel is None:
-    #                log = member.guild.get_channel(683064390068600862)
-    #                embed=discord.Embed(title="Voice Join", description=f"{member.name}#{member.discriminator} ({member.mention}) - (``{member.id}``) joined {after.channel.mention}", color=0x5da862, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-    #                await log.send(embed=embed)
-    #            elif after.channel is None:
-    #                log = member.guild.get_channel(683064390068600862)
-    #                embed2=discord.Embed(title="Voice Leave", description=f"{member.name}#{member.discriminator} ({member.mention}) - (``{member.id}``) left {before.channel.mention}", color=0xd24141, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-    #                await log.send(embed=embed2)
-    #            else:
-    #                log = member.guild.get_channel(683064390068600862)
-    #                embed3=discord.Embed(title="Voice Switch", description=f"{member.name}#{member.discriminator} ({member.mention}) - (``{member.id}``) switched from {before.channel.mention} to {after.channel.mention}", color=0xe4c367, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-    #                await log.send(embed=embed3)
-    #    else:       
-    #        return
-
     @commands.Cog.listener()
     async def on_message(self, message):
         censor = Configuration.getConfigVar(message.guild.id, "NONEMERGENCY")
@@ -56,18 +37,6 @@ class moderation(commands.Cog):
             if message.author.id == 706269652724219987:
                 return
             else:
-                if "𝐒𝐞𝐥𝐥𝐢𝐧𝐠 𝐍𝐀 𝐚𝐜𝐜𝐨𝐮𝐧𝐭 𝐰𝐢𝐭𝐡 𝟏𝟑𝟐𝟎𝟎 𝐕𝐚𝐥𝐨𝐫𝐚𝐧𝐭 𝐩𝐨𝐢𝐧𝐭𝐬" in message.content:
-                    role = discord.utils.get(message.author.guild.roles, id=683927402530734090)
-                    await message.author.add_roles(role)
-                    await message.delete()
-                    spam=discord.Embed(title="Account Seller Spam found", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted** to sell their account by spamming their stuff everywhere. Here is the context. ```{message.content}```", color=0xff7171)
-                    await logging.send(embed=spam)
-                if "𝚂𝚎𝚕𝚕𝚒𝚗𝚐 𝙽𝙰 𝚊𝚌𝚌𝚘𝚞𝚗𝚝 𝚠𝚒𝚝𝚑 𝟷𝟹𝟸𝟶𝟶 𝚅𝚊𝚕𝚘𝚛𝚊𝚗𝚝 𝚙𝚘𝚒𝚗𝚝𝚜" in message.content:
-                    role = discord.utils.get(message.author.guild.roles, id=683927402530734090)
-                    await message.author.add_roles(role)
-                    await message.delete()
-                    spam=discord.Embed(title="Account Seller Spam found", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted** to sell their account by spamming their stuff everywhere. Here is the context. ```{message.content}```", color=0xff7171)
-                    await logging.send(embed=spam)
                 if fake.mention == message.content:
                     embed6=discord.Embed(title="Invalid Emergency Reason!", description=f"Hmmmm... Seems like you did not provide any reason for me to ping the emergency role. Here are the list of valid reasons to ping Emergency role, if you still believe that this is something that would require the moderators' attention then please contact our modmail at <@711678018573303809>!\n\n- Raid\n- NSFW content (porngraphy or gore)", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     response = await message.channel.send(embed=embed6)
@@ -188,6 +157,8 @@ class moderation(commands.Cog):
         user = ctx.guild.get_member(member.id)
         if modrole not in ctx.author.roles:
             return
+        if ctx.author.id == member.id:
+            await ctx.send("Sorry, I am unable to help you to pull yourself in the pullroom.")
         else:
             if ctx.guild.get_member(member.id) is None:
                 embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member.name}#{member.discriminator} (``{member.id}``) to the pullroom. It seems like they likely left this server or was kicked by a moderator.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
@@ -244,6 +215,8 @@ class moderation(commands.Cog):
         user = ctx.guild.get_member(member.id)
         if modrole not in ctx.author.roles:
             return
+        if ctx.author.id == member.id:
+            await ctx.send("Sorry, I am unable to help you to pull yourself in the pullroom.")
         if ctx.guild.get_member(member.id) is None:
             embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to remove {member.name}#{member.discriminator} (``{member.id}``) from the pullroom. It seems like they likely left this server or was kicked by a moderator.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)

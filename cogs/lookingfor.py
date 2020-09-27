@@ -231,12 +231,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -244,12 +245,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 else:
                     return
@@ -272,12 +274,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -285,12 +288,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 else:
                     return
@@ -313,12 +317,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -326,12 +331,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 else:
                     return
@@ -354,12 +360,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -367,12 +374,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 else:
                     return
@@ -395,12 +403,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -408,12 +417,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **word**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 else:
                     return
@@ -436,12 +446,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -449,12 +460,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await after.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 else:
                     return
@@ -503,12 +515,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -516,12 +529,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 else:
                     return
@@ -544,12 +558,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -557,12 +572,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 else:
                     return
@@ -585,12 +601,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -598,12 +615,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 else:
                     return
@@ -626,12 +644,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -639,12 +658,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 else:
                     return
@@ -667,12 +687,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -680,7 +701,6 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Ranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **word**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
@@ -708,12 +728,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 for word in (w.lower() for w in ranking):
                     if word in split:
@@ -721,12 +742,13 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"Filtered Word from Unranked Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        await asyncio.sleep(15)
                         try:
                             await message.delete()
                         except NotFound as e:
+                            await asyncio.sleep(15)
                             await response.delete()
                         else:
+                            await asyncio.sleep(15)
                             await response.delete()
                 else:
                     return
