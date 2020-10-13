@@ -155,6 +155,8 @@ class moderation(commands.Cog):
         logs = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOMLOG"))
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         user = ctx.guild.get_member(member.id)
+        if reason == "":
+            return await ctx.send("Please make sure to provide a reason why you're pulling the user in!")
         if modrole not in ctx.author.roles:
             return
         if ctx.author.id == member.id:
@@ -213,6 +215,8 @@ class moderation(commands.Cog):
         logs = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOMLOG"))
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         user = ctx.guild.get_member(member.id)
+        if reason == "":
+            return await ctx.send("Please make sure to provide a reason why you're removing the user from the pullroom!")
         if modrole not in ctx.author.roles:
             return
         if ctx.author.id == member.id:
