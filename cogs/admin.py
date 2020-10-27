@@ -16,7 +16,7 @@ from argparse import ArgumentParser
 
 class admin(commands.Cog):
     def __init__(self, bot):
-        pass
+        self.bot = bot
 
 
     @commands.command()
@@ -27,7 +27,7 @@ class admin(commands.Cog):
             await self.bot.close()
         else:
             return
-            
+
     @commands.guild_only()
     @commands.group(hidden=True)
     @commands.has_permissions(manage_roles=True)
