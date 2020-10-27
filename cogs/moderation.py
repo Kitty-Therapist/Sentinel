@@ -153,7 +153,7 @@ class moderation(commands.Cog):
         if modrole not in ctx.author.roles:
             return
         else:
-            "Ping, pong! I am still alive! :heart:"
+            await ctx.send("Ping, pong! I am still alive! :heart:")
 
     #This allows the moderator to pull the user into a private channel to discuss with them.
 
