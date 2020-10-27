@@ -18,6 +18,16 @@ class admin(commands.Cog):
     def __init__(self, bot):
         pass
 
+
+    @commands.command()
+    async def restart(self, ctx:commands.Context):
+        """Restarts the bot."""
+        if ctx.author.id == 298618155281154058:
+            await ctx.send("Restarting!")
+            await self.bot.close()
+        else:
+            return
+            
     @commands.guild_only()
     @commands.group(hidden=True)
     @commands.has_permissions(manage_roles=True)
