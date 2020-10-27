@@ -44,7 +44,7 @@ async def on_command_error(ctx: commands.Context, error):
     elif isinstance(error, commands.MissingPermissions):
         return
     elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send(f"You are missing a required argument!(See {ctx.prefix}help {ctx.command.qualified_name} for info on how to use this command)")
+        return
     elif isinstance(error, commands.CommandNotFound):
         return
     else:
