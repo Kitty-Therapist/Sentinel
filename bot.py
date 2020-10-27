@@ -14,8 +14,9 @@ from discord.abc import PrivateChannel
 from utils import Util, Configuration
 from argparse import ArgumentParser
 
-bot = commands.Bot(command_prefix=">", description='The bot to help with various duties such as LFG, Pullroom, and Etc!')
 
+bot = commands.Bot(command_prefix=">", description='The bot to help with various duties such as LFG, Pullroom, and Etc!')
+bot.remove_command('help')
 bot.starttime = datetime.datetime.now()
 bot.startup_done = False
 
