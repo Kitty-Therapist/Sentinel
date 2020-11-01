@@ -12,7 +12,7 @@ from discord.ext.commands import BucketType, BadArgument
 from discord import abc
 from discord.abc import PrivateChannel
 from utils import Util, Configuration
-from argparse import ArgumentParse
+from argparse import ArgumentParser
 
 intents = discord.Intents.default()
 intents.members = True
