@@ -12,7 +12,10 @@ from discord.ext.commands import BucketType, BadArgument
 from discord import abc
 from discord.abc import PrivateChannel
 from utils import Util, Configuration
-from argparse import ArgumentParser
+from argparse import ArgumentParse
+
+intents = discord.Intents.default()
+intents.members = True
 
 
 bot = commands.Bot(command_prefix=">", description='The bot to help with various duties such as LFG, Pullroom, and Etc!')
