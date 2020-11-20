@@ -226,7 +226,7 @@ class moderation(commands.Cog):
             embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
             return await ctx.send(embed=embed)
-        elif isinstance(error, commands.BadArgument):
+        if isinstance(error, commands.BadArgument):
             embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
             return await ctx.send(embed=embed)
@@ -298,7 +298,7 @@ class moderation(commands.Cog):
             embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to remove {member} from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
             await ctx.send(embed=embed)
-        elif isinstance(error, commands.BadArgument):
+        if isinstance(error, commands.BadArgument):
             embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to remove {member} from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
             await ctx.send(embed=embed)
