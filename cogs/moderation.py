@@ -154,6 +154,28 @@ class moderation(commands.Cog):
             return
         else:
             await ctx.send("Ping, pong! I am still alive! :heart:")
+    
+    @pull.error
+    async def pull_error(ctx, error):
+        if isinstance(error, commands.BadArgument):
+            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            return await ctx.send(embed=embed)
+        if isinstance(error, discord.NotFound):
+            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            return await ctx.send(embed=embed)
+
+    @remove.error
+    async def remove_error(ctx, error):
+        if isinstance(error, commands.BadArgument):
+            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to remove {member} from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            return await ctx.send(embed=embed)
+        if isinstance(error, discord.NotFound):
+            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to remove {member} from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            return await ctx.send(embed=embed)
 
     #This allows the moderator to pull the user into a private channel to discuss with them.
 
@@ -215,10 +237,6 @@ class moderation(commands.Cog):
                             embed=discord.Embed(title="Cannot send message to the pullroom", description=f":warning: I was not able to send a message in the pullroom. It would appear that I do not have permission to continue, please have a Senior Moderator or a Bot Developer to fix this. \n\nIf this persists, contact Ghoul.\n\n**Error:**\n{e}", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                             embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                             await ctx.send(embed=embed)
-                        except discord.NotFound as e:
-                            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-                            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
-                            return await ctx.send(embed=embed)
                 else:
                     embed=discord.Embed(title="User in Pullroom", description=f":warning: {member.mention} - {member.name}#{member.discriminator} (``{member.id}``) is already in the pullroom! Either you added them already and forgot about them or someone else is handling the user.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
@@ -282,9 +300,6 @@ class moderation(commands.Cog):
                             embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                             await ctx.send(embed=embed)
                         except discord.NotFound as e:
-                            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-                            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
-                            return await ctx.send(embed=embed)
                 else:
                     embed=discord.Embed(title="User no longer in Pullroom", description=f":warning: {member.mention} - {member.name}#{member.discriminator} (``{member.id}``) seems to be no longer in the pullroom. Either that someone else used the command or manually removed the role.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)

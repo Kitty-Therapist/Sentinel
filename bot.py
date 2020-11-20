@@ -18,7 +18,7 @@ intents = discord.Intents.default()
 intents.members = True
 
 
-bot = commands.Bot(command_prefix=">", description='The bot to help with various duties such as LFG, Pullroom, and Etc!')
+bot = commands.Bot(command_prefix=">", description='The bot to help with various duties such as LFG, Pullroom, and Etc!', intents=intents)
 bot.remove_command('help')
 bot.starttime = datetime.datetime.now()
 bot.startup_done = False
