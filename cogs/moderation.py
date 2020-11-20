@@ -154,13 +154,6 @@ class moderation(commands.Cog):
             return
         else:
             await ctx.send("Ping, pong! I am still alive! :heart:")
-    
-    @bot.error
-    async def info_error(ctx, error):
-        if isinstance(error, discord.NotFound):
-            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add or remove {member} to/from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
-            return await ctx.send(embed=embed)
 
     #This allows the moderator to pull the user into a private channel to discuss with them.
 
