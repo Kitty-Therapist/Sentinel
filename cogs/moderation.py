@@ -155,25 +155,10 @@ class moderation(commands.Cog):
         else:
             await ctx.send("Ping, pong! I am still alive! :heart:")
     
-    @pull.error
-    async def pull_error(ctx, error):
-        if isinstance(error, commands.BadArgument):
-            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
-            return await ctx.send(embed=embed)
+    @info.error
+    async def info_error(ctx, error):
         if isinstance(error, discord.NotFound):
-            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
-            return await ctx.send(embed=embed)
-
-    @remove.error
-    async def remove_error(ctx, error):
-        if isinstance(error, commands.BadArgument):
-            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to remove {member} from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
-            return await ctx.send(embed=embed)
-        if isinstance(error, discord.NotFound):
-            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to remove {member} from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add or remove {member} to/from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
             return await ctx.send(embed=embed)
 
