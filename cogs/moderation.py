@@ -155,7 +155,7 @@ class moderation(commands.Cog):
         else:
             await ctx.send("Ping, pong! I am still alive! :heart:")
     
-    @info.error
+    @bot.error
     async def info_error(ctx, error):
         if isinstance(error, discord.NotFound):
             embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add or remove {member} to/from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
