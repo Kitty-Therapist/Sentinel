@@ -188,9 +188,9 @@ class moderation(commands.Cog):
                 embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                 await ctx.send(embed=embed)
             else:
-                if pullroomrole not in user.roles:
+                if pullroomrole not in member.roles:
                     try:
-                        await user.add_roles(pullroomrole)
+                        await member.add_roles(pullroomrole)
                     except discord.Forbidden as e:
                         embed=discord.Embed(title="Cannot add Pullroom role", description=f":warning: I was not able to add {member.name}#{member.discriminator} (``{member.id}``) to the pullroom. It would appear that I do not have Manage Roles permission to continue, please have a Senior Moderator or a Bot Developer to fix this. \n\nIf this persists, contact Ghoul.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                         embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
@@ -262,9 +262,9 @@ class moderation(commands.Cog):
                 embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                 await ctx.send(embed=embed)
             else:
-                if pullroomrole in user.roles:
+                if pullroomrole in member.roles:
                     try:
-                        await user.remove_roles(pullroomrole)
+                        await member.remove_roles(pullroomrole)
                     except discord.Forbidden as e:
                         embed=discord.Embed(title="Cannot remove Pullroom role", description=f":warning: I was not able to remove {member.name}#{member.discriminator} (``{member.id}``) from the pullroom. It would appear that I do not have Manage Roles permission to continue, please have a Senior Moderator or a Bot Developer to fix this. \n\nIf this persists, contact Ghoul.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                         embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
