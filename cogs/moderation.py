@@ -165,7 +165,8 @@ class moderation(commands.Cog):
         pullroomrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "PULLROOMROLE"))
         logs = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOMLOG"))
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
-        user = await fetch_user(member.id)
+        verify = await fetch_user(member.id)
+        user = ctx.guild.get_member(verify.id)
         if reason == "":
             return await ctx.send("Please make sure to provide a reason why you're pulling the user in!")
         if modrole not in ctx.author.roles:
