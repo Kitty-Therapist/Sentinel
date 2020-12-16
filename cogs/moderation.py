@@ -221,16 +221,16 @@ class moderation(commands.Cog):
                     embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                     embed.set_thumbnail(url=member.avatar_url)
                     await ctx.send(embed=embed)
-    @pull.error
-    async def pull_error(ctx, error):
-        if isinstance(error, commands.NotFound):
-            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
-            return await ctx.send(embed=embed)
-        if isinstance(error, commands.BadArgument):
-            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
-            return await ctx.send(embed=embed)
+    #@pull.error
+    #async def pull_error(ctx, error):
+    #    if isinstance(error, commands.NotFound):
+    #        embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+    #        embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+    #        return await ctx.send(embed=embed)
+   #     if isinstance(error, commands.BadArgument):
+    #        embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+    #        embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+    #        return await ctx.send(embed=embed)
         
     @commands.command()
     @commands.guild_only()
