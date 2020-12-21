@@ -70,10 +70,11 @@ class moderation(commands.Cog):
                             cool = await message.channel.send("Looks like you do not have the required XP roles needed to ping the Emergency role. if it's urgent then please contact the mods at <@711678018573303809>")
                             embed10=discord.Embed(title= "Permission Denied to use Emergency Ping", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted to use the Emergency role**, but they do not have any of the XP roles. They've been informed to let us know via Modmail if it requires our attention. Here is the context: ```{message.content}```", color=0xff7171)
                             await logging.send(f"{message.author.id}")
-                            await logging.send(embed=embed9)
+                            await logging.send(embed=embed10)
                             await asyncio.sleep(15)
                             await message.delete()
                             await cool.delete()
+                            return
                         else:
                             if any(word in message.content.lower() for word in censor):
                                 embed6=discord.Embed(title="Invalid Emergency Reason!", description=f"Hmmmm... Seems like you did not provide the valid reason for me to ping the emergency role. Here are the list of valid reasons to ping Emergency role, if you still believe that this is something that would require the moderators' attention then please contact our modmail at <@711678018573303809>!\n\n- Raid\n- NSFW content (porngraphy or gore)", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
@@ -102,7 +103,7 @@ class moderation(commands.Cog):
                                         await logging.send(f"{message.author.id}")
                                         await logging.send(embed=embed11)
                                         self.last_timeStamp = datetime.datetime.utcnow()
-                                embed = discord.Embed(title="You are about to ping the Emergency role", description="By pinging the Emergency role, you are about to summon our moderation team. **Are you sure that you are using the Emergency ping for the following reasons:**\n\n- Raid\n\n- Major spam\n\n- NSFW content", color=0xff7171)
+                                embed = discord.Embed(title="You are about to ping the Emergency role", description="**MODERATORS ARE NOT RIOT EMPLOYEES. DO NOT PING FOR IN GAME ISSUES.**\n\nBy pinging the Emergency role, you are about to summon our moderation team.\n\n**Are you sure that you are using the Emergency ping for the following reasons:**\n\n- Raid\n- Major spam\n- NSFW content", color=0xff7171)
                                 msg = await message.channel.send(embed=embed)
                                 await confirm_command2(self, message, msg, on_yes=yes)
                 else:
@@ -116,6 +117,12 @@ class moderation(commands.Cog):
     @commands.bot_has_permissions(add_reactions=True)
     async def emergency(self, ctx: commands.Context, *, reason=""):
         """Uses the emergency ping!"""
+        level_50 = 684140913865392224
+        level_40 = 723266895310094336
+        level_30 = 684140874556244053
+        level_20 = 723266887471071262
+        level_15 = 684140826762149923
+        level_5 = 713077794036383857
         bademergency = Configuration.getConfigVar(ctx.guild.id, "NONEMERGENCY")
         emergencyrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "EMERGENCY"))
         logging = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "LOGGING"))
@@ -125,6 +132,19 @@ class moderation(commands.Cog):
             embed8=discord.Embed(title="Invalid Emergency Usage Detected", description=f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.mention}) - (``{ctx.author.id}``) **attempted** to use the Emergency role in {ctx.channel.mention}, but they did not provide any reason at all! Either this may be some kind of test, or they are attempting to abuse it.", color=0xff7171)
             await logging.send(f"{ctx.author.id}")
             await logging.send(embed=embed8) 
+            ctx.command.reset_cooldown(ctx)
+            return
+
+        roles = [level_5, level_15, level_20, level_30, level_40, level_50]
+        user_roles = [role.id for role in ctx.author.roles]
+        if len(set(roles) & set(user_roles)) is 0:
+            cool = await ctx.channel.send("Looks like you do not have the required XP roles needed to ping the Emergency role. if it's urgent then please contact the mods at <@711678018573303809>")
+            embed10=discord.Embed(title= "Permission Denied to use Emergency Ping", description=f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.mention}) - (``{ctx.author.id}``) **attempted to use the Emergency role**, but they do not have any of the XP roles. They've been informed to let us know via Modmail if it requires our attention. Here is the context: ```>emergency {reason}```", color=0xff7171)
+            await logging.send(f"{ctx.author.id}")
+            await logging.send(embed=embed10)
+            await asyncio.sleep(15)
+            await ctx.message.delete()
+            await cool.delete()
             ctx.command.reset_cooldown(ctx)
             return
         
@@ -157,8 +177,7 @@ class moderation(commands.Cog):
                 embed11=discord.Embed(title= "Emergency Usage Detected!", description=f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.mention}) - (``{ctx.author.id}``) **attempted** to use the Emergency role in {ctx.channel.mention}, but the attempt was successful as I did not find anything in my list to mark it invalid! Here is the context for anyone wanting to know the ping: ```>emergency {reason}```", color=0x77dd77)
                 await logging.send(f"{ctx.author.id}")
                 await logging.send(embed=embed11)
-                
-        embed2=discord.Embed(title="Emergency Ping Warning", description=f"Are you ABSOLUTELY sure that you want to ping the Emergency role for this reason: ``{reason}``?\n\nMake sure that the reason that you are pinging the emergency role meets the following (if it does not meet the following requirements but you feel like you need the moderators' attention, please contact us at <@711678018573303809>.) :\n\n- Major raid\n- NSFW content in channel", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+        embed2 = discord.Embed(title="You are about to ping the Emergency role", description="**MODERATORS ARE NOT RIOT EMPLOYEES. DO NOT PING FOR IN GAME ISSUES.**\n\nBy pinging the Emergency role, you are about to summon our moderation team.\n\n**Are you sure that you are using the Emergency ping for the following reasons:**\n\n- Raid\n- Major spam\n- NSFW content", color=0xff7171, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
         msg = await ctx.send(embed=embed2)
         await confirm_command(ctx, msg, on_yes=yes)
     
@@ -328,4 +347,3 @@ class moderation(commands.Cog):
 
 def setup(bot):
     bot.add_cog(moderation(bot))
-
