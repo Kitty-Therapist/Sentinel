@@ -21,9 +21,16 @@ class moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.last_timeStamp = datetime.datetime.utcfromtimestamp(0)
-    
+
     @commands.Cog.listener()
     async def on_message(self, message):
+        #Levels in VALORANT
+        level_50 = 684140913865392224
+        level_40 = 723266895310094336
+        level_30 = 684140874556244053
+        level_20 = 723266887471071262
+        level_15 = 684140826762149923
+        level_5 = 713077794036383857
         censor = Configuration.getConfigVar(message.guild.id, "NONEMERGENCY")
         emergencyrole = message.guild.get_role(Configuration.getConfigVar(message.guild.id, "EMERGENCY"))
         fake = message.guild.get_role(Configuration.getConfigVar(message.guild.id, "FAKEEMERGENCY"))
@@ -57,36 +64,47 @@ class moderation(commands.Cog):
                         await message.delete()
                         await cool.delete()
                     else:
-                        if any(word in message.content.lower() for word in censor):
-                            embed6=discord.Embed(title="Invalid Emergency Reason!", description=f"Hmmmm... Seems like you did not provide the valid reason for me to ping the emergency role. Here are the list of valid reasons to ping Emergency role, if you still believe that this is something that would require the moderators' attention then please contact our modmail at <@711678018573303809>!\n\n- Raid\n- NSFW content (porngraphy or gore)", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-                            response = await message.channel.send(embed=embed6)
-                            embed10=discord.Embed(title= "Possible Emergency Abuse!", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted** to use the Emergency role in {message.channel.mention}, but the Emergency reason did not seem like it was urgent. They've been informed to use our Modmail is there is an actual emergency. Here is the context: ```{message.content}```", color=0xff7171)
+                        roles = [level_5, level_15, level_20, level_30, level_40, level_50]
+                        user_roles = [role.id for role in message.author.roles]
+                        if len(set(roles) & set(user_roles)) is 0:
+                            cool = await message.channel.send("Looks like you do not have the required XP roles needed to ping the Emergency role. if it's urgent then please contact the mods at <@711678018573303809>")
+                            embed10=discord.Embed(title= "Permission Denied to use Emergency Ping", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted to use the Emergency role**, but they do not have any of the XP roles. They've been informed to let us know via Modmail if it requires our attention. Here is the context: ```{message.content}```", color=0xff7171)
                             await logging.send(f"{message.author.id}")
-                            await logging.send(embed=embed10)
+                            await logging.send(embed=embed9)
                             await asyncio.sleep(15)
                             await message.delete()
-                            await response.delete()
-                            return
+                            await cool.delete()
                         else:
-                            async def yes():
-                                if emergencyrole is None:
-                                    embed3=discord.Embed(title="Unconfigured Emergency role!", description=f"Hmmmm... Seems like the emergency role is not configured. Please contact the mods over at the Modmail at <@711678018573303809>", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-                                    riprole = await message.channel.send(embed=embed3)
-                                    await asyncio.sleep(15)
-                                    await riprole.delete()
-                                    await message.delete()
-                                    return
-                                else:
-                                    await message.channel.send(f"{emergencyrole.mention}, someone needs your assistance. Please ensure that this matter is solved appropriately.")
-                                    embed4=discord.Embed(title="Emergency Situation!", description=f"{message.author.mention} ({message.author.name}#{message.author.discriminator} (``{message.author.id}``) has pinged the Emergency role with ``{message.content}``.", color=0xff9494, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-                                    await message.channel.send(embed=embed4)
-                                    embed11=discord.Embed(title= "Emergency Usage Detected!", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted** to use the Emergency role in {message.channel.mention}, but the attempt was successful as I did not find anything in my list to mark it invalid! Here is the context for anyone wanting to know the ping: ```{message.content}```", color=0x77dd77)
-                                    await logging.send(f"{message.author.id}")
-                                    await logging.send(embed=embed11)
-                                    self.last_timeStamp = datetime.datetime.utcnow()
-                            embed = discord.Embed(title="You are about to ping the Emergency role", description="By pinging the Emergency role, you are about to summon our moderation team. **Are you sure that you are using the Emergency ping for the following reasons:**\n\n- Raid\n\n- Major spam\n\n- NSFW content", color=0xff7171)
-                            msg = await message.channel.send(embed=embed)
-                            await confirm_command2(self, message, msg, on_yes=yes)
+                            if any(word in message.content.lower() for word in censor):
+                                embed6=discord.Embed(title="Invalid Emergency Reason!", description=f"Hmmmm... Seems like you did not provide the valid reason for me to ping the emergency role. Here are the list of valid reasons to ping Emergency role, if you still believe that this is something that would require the moderators' attention then please contact our modmail at <@711678018573303809>!\n\n- Raid\n- NSFW content (porngraphy or gore)", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                                response = await message.channel.send(embed=embed6)
+                                embed10=discord.Embed(title= "Possible Emergency Abuse!", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted** to use the Emergency role in {message.channel.mention}, but the Emergency reason did not seem like it was urgent. They've been informed to use our Modmail is there is an actual emergency. Here is the context: ```{message.content}```", color=0xff7171)
+                                await logging.send(f"{message.author.id}")
+                                await logging.send(embed=embed10)
+                                await asyncio.sleep(15)
+                                await message.delete()
+                                await response.delete()
+                                return
+                            else:
+                                async def yes():
+                                    if emergencyrole is None:
+                                        embed3=discord.Embed(title="Unconfigured Emergency role!", description=f"Hmmmm... Seems like the emergency role is not configured. Please contact the mods over at the Modmail at <@711678018573303809>", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                                        riprole = await message.channel.send(embed=embed3)
+                                        await asyncio.sleep(15)
+                                        await riprole.delete()
+                                        await message.delete()
+                                        return
+                                    else:
+                                        await message.channel.send(f"{emergencyrole.mention}, someone needs your assistance. Please ensure that this matter is solved appropriately.")
+                                        embed4=discord.Embed(title="Emergency Situation!", description=f"{message.author.mention} ({message.author.name}#{message.author.discriminator} (``{message.author.id}``) has pinged the Emergency role with ``{message.content}``.", color=0xff9494, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                                        await message.channel.send(embed=embed4)
+                                        embed11=discord.Embed(title= "Emergency Usage Detected!", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted** to use the Emergency role in {message.channel.mention}, but the attempt was successful as I did not find anything in my list to mark it invalid! Here is the context for anyone wanting to know the ping: ```{message.content}```", color=0x77dd77)
+                                        await logging.send(f"{message.author.id}")
+                                        await logging.send(embed=embed11)
+                                        self.last_timeStamp = datetime.datetime.utcnow()
+                                embed = discord.Embed(title="You are about to ping the Emergency role", description="By pinging the Emergency role, you are about to summon our moderation team. **Are you sure that you are using the Emergency ping for the following reasons:**\n\n- Raid\n\n- Major spam\n\n- NSFW content", color=0xff7171)
+                                msg = await message.channel.send(embed=embed)
+                                await confirm_command2(self, message, msg, on_yes=yes)
                 else:
                     return
         else:
@@ -221,16 +239,16 @@ class moderation(commands.Cog):
                     embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                     embed.set_thumbnail(url=member.avatar_url)
                     await ctx.send(embed=embed)
-    #@pull.error
-    #async def pull_error(ctx, error):
-    #    if isinstance(error, commands.NotFound):
-    #        embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-    #        embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
-    #        return await ctx.send(embed=embed)
-   #     if isinstance(error, commands.BadArgument):
-    #        embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-    #        embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
-    #        return await ctx.send(embed=embed)
+    @pull.error
+    async def pull_error(self, ctx, error):
+        if isinstance(error, commands.NotFound):
+            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {ctx.member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            return await ctx.send(embed=embed)
+        if isinstance(error, commands.BadArgument):
+            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to add {ctx.member} to the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            return await ctx.send(embed=embed)
         
     @commands.command()
     @commands.guild_only()
@@ -240,8 +258,7 @@ class moderation(commands.Cog):
         pullroomrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "PULLROOMROLE"))
         logs = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOMLOG"))
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
-        verify = await self.bot.fetch_user(member.id)
-        user = ctx.guild.get_member(verify.id)
+        user = ctx.guild.get_member(member.id)
         if reason == "":
             return await ctx.send("Please make sure to provide a reason why you're removing the user from the pullroom!")
         if modrole not in ctx.author.roles:
@@ -295,13 +312,13 @@ class moderation(commands.Cog):
                     embed.set_thumbnail(url=member.avatar_url)
                     await ctx.send(embed=embed)
     @remove.error
-    async def remove_error(ctx, error):
+    async def remove_error(self, ctx, error):
         if isinstance(error, commands.NotFound):
-            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to remove {member} from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to remove {ctx.member} from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
             await ctx.send(embed=embed)
         if isinstance(error, commands.BadArgument):
-            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to remove {member} from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed=discord.Embed(title="Unknown Member Error", description=f":warning: I was not able to remove {ctx.member} from the pullroom. Please verify to ensure that the userID that you provided is correct.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
             await ctx.send(embed=embed)
             
@@ -311,3 +328,4 @@ class moderation(commands.Cog):
 
 def setup(bot):
     bot.add_cog(moderation(bot))
+
