@@ -227,7 +227,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the after's content in case of any false positives.")
+                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to send.\nIf you believe that this may be in error, please contact {modmail} to let us know with the after's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
@@ -270,7 +270,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to submit.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
@@ -313,7 +313,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to submit.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
@@ -356,7 +356,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to submit.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
@@ -399,7 +399,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to submit.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
@@ -442,7 +442,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        response = await after.channel.send(f"Hey there {after.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to submit..\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention} containing blacklisted word **{word}**:\n\n```{after.content}```", color=0xff7171)
                         await logging.send(f"{after.author.id}")
                         await logging.send(embed=embed)
@@ -511,7 +511,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to submit.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
@@ -554,7 +554,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to submit.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
@@ -597,7 +597,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to submit.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
@@ -640,7 +640,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to submit.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
@@ -683,7 +683,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to submit.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
@@ -724,7 +724,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 for word in (w.lower() for w in unsupported):
                     if word in split:
-                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support any type of tournaments, recruiting, or fast forfeit in our Looking For.\nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
+                        response = await message.channel.send(f"Hey there {message.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to submit. \nIf you believe that this may be in error, please contact {modmail} to let us know with the message's content in case of any false positives.")
                         embed = discord.Embed(title=f"Filtered Word from Unsupported Category", description=f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention} containing blacklisted word **{word}**:\n\n```{message.content}```", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
