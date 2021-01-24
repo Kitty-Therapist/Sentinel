@@ -67,7 +67,7 @@ class moderation(commands.Cog):
                         roles = [level_5, level_15, level_20, level_30, level_40, level_50]
                         user_roles = [role.id for role in message.author.roles]
                         if len(set(roles) & set(user_roles)) is 0:
-                            cool = await message.channel.send("Looks like you do not have the required XP roles needed to ping the Emergency role. If it's urgent then please contact the mods at <@711678018573303809>")
+                            cool = await message.channel.send("Looks like you do not have the required XP roles needed to ping the Emergency role. if it's urgent then please contact the mods at <@711678018573303809>")
                             embed15=discord.Embed(title="Permission Denied to use Emergency Ping", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted to use the Emergency role**, but they do not have any of the XP roles. They've been informed to let us know via Modmail if it requires our attention. Here is the context: ```{message.content}```", color=0xff7171)
                             await logging.send(f"{message.author.id}")
                             await logging.send(embed=embed15)
@@ -138,7 +138,7 @@ class moderation(commands.Cog):
         roles = [level_5, level_15, level_20, level_30, level_40, level_50]
         user_roles = [role.id for role in ctx.author.roles]
         if len(set(roles) & set(user_roles)) is 0:
-            cool = await ctx.channel.send("Looks like you do not have the required XP roles needed to ping the Emergency role. If it's urgent then please contact the mods at <@711678018573303809>")
+            cool = await ctx.channel.send("Looks like you do not have the required XP roles needed to ping the Emergency role. if it's urgent then please contact the mods at <@711678018573303809>")
             embed10=discord.Embed(title= "Permission Denied to use Emergency Ping", description=f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.mention}) - (``{ctx.author.id}``) **attempted to use the Emergency role**, but they do not have any of the XP roles. They've been informed to let us know via Modmail if it requires our attention. Here is the context: ```>emergency {reason}```", color=0xff7171)
             await logging.send(f"{ctx.author.id}")
             await logging.send(embed=embed10)
@@ -181,6 +181,38 @@ class moderation(commands.Cog):
         msg = await ctx.send(embed=embed2)
         await confirm_command(ctx, msg, on_yes=yes)
     
+
+    @commands.group(hidden=True)
+    async def role(self, ctx: commands.context):
+        if ctx.subcommand_passed is None:
+            embed=discord.Embed(title="Role", description="**Provides an option to lock or unlock server via everyone role.**", color=0xff9494, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            await ctx.send(embed=embed)
+        else:
+            return
+    
+    @role.command()
+    async def lock(self, ctx:commands.context, *, reason=""):
+        everyonerole = ctx.guild.default_role
+        perms = everyonerole.permissions
+        perms.send_messages = False
+        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
+        if modrole not in ctx.author.roles:
+            return
+        else:
+            await everyonerole.edit(permissions=perms)
+            await ctx.send("Server lockdown is successful.")
+    
+    @role.command()
+    async def unlock(self, ctx:commands.context, *, reason=""):
+        everyonerole = ctx.guild.default_role
+        perms = everyonerole.permissions
+        perms.send_messages = True
+        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
+        if modrole not in ctx.author.roles:
+            return
+        else:
+            await everyonerole.edit(permissions=perms)
+            await ctx.send("Server has been successfully unlocked.")
 
     @commands.command()
     @commands.guild_only()
