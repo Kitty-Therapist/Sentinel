@@ -626,3 +626,6 @@ class lookingfor(commands.Cog):
                     return
             else:
                 return
+                 
+def setup(bot):
+    bot.add_cog(lookingfor(bot))
