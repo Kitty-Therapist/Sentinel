@@ -31,6 +31,7 @@ class moderation(commands.Cog):
         level_20 = 723266887471071262
         level_15 = 684140826762149923
         level_5 = 713077794036383857
+        on_break = 738481945616580700
         censor = Configuration.getConfigVar(message.guild.id, "NONEMERGENCY")
         emergencyrole = message.guild.get_role(Configuration.getConfigVar(message.guild.id, "EMERGENCY"))
         fake = message.guild.get_role(Configuration.getConfigVar(message.guild.id, "FAKEEMERGENCY"))
@@ -64,7 +65,7 @@ class moderation(commands.Cog):
                         await message.delete()
                         await cool.delete()
                     else:
-                        roles = [level_5, level_15, level_20, level_30, level_40, level_50]
+                        roles = [level_5, level_15, level_20, level_30, level_40, level_50, on_break]
                         user_roles = [role.id for role in message.author.roles]
                         if len(set(roles) & set(user_roles)) is 0:
                             cool = await message.channel.send("Looks like you do not have the required XP roles needed to ping the Emergency role. if it's urgent then please contact the mods at <@711678018573303809>")
@@ -123,6 +124,7 @@ class moderation(commands.Cog):
         level_20 = 723266887471071262
         level_15 = 684140826762149923
         level_5 = 713077794036383857
+        on_break = 738481945616580700
         bademergency = Configuration.getConfigVar(ctx.guild.id, "NONEMERGENCY")
         emergencyrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "EMERGENCY"))
         logging = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "LOGGING"))
@@ -135,7 +137,7 @@ class moderation(commands.Cog):
             ctx.command.reset_cooldown(ctx)
             return
 
-        roles = [level_5, level_15, level_20, level_30, level_40, level_50]
+        roles = [level_5, level_15, level_20, level_30, level_40, level_50, on_break]
         user_roles = [role.id for role in ctx.author.roles]
         if len(set(roles) & set(user_roles)) is 0:
             cool = await ctx.channel.send("Looks like you do not have the required XP roles needed to ping the Emergency role. if it's urgent then please contact the mods at <@711678018573303809>")
