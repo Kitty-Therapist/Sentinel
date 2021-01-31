@@ -624,6 +624,5 @@ class lookingfor(commands.Cog):
                             await response.delete()
                 else:
                     return
-                 
-def setup(bot):
-    bot.add_cog(lookingfor(bot))
+            else:
+                return
