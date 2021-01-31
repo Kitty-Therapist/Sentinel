@@ -514,6 +514,7 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
+                        break
                         try:
                             await message.delete()
                         except NotFound as e:
@@ -534,6 +535,7 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
+                        break
                         try:
                             await message.delete()
                         except NotFound as e:
@@ -554,6 +556,7 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
+                        break
                         try:
                             await message.delete()
                         except NotFound as e:
@@ -574,6 +577,7 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
+                        break
                         try:
                             await message.delete()
                         except NotFound as e:
@@ -594,6 +598,7 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
+                        break
                         try:
                             await message.delete()
                         except NotFound as e:
@@ -614,6 +619,7 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
+                        break
                         try:
                             await message.delete()
                         except NotFound as e:
