@@ -514,15 +514,16 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        break
                         try:
                             await message.delete()
                         except NotFound as e:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                         else:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                 else:
                     return
             #looking for normal EU
@@ -535,17 +536,18 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        break
                         try:
                             await message.delete()
                         except NotFound as e:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                         else:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                 else:
-                    return        
+                    return
             #looking for ranked NA
             if message.channel.id == rankedNA.id:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
@@ -556,15 +558,16 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        break
                         try:
                             await message.delete()
                         except NotFound as e:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                         else:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                 else:
                     return
             #looking for ranked EU
@@ -577,15 +580,16 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        break
                         try:
                             await message.delete()
                         except NotFound as e:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                         else:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                 else:
                     return
             #looking for normal Other
@@ -598,17 +602,19 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        break
                         try:
                             await message.delete()
                         except NotFound as e:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                         else:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                 else:
-                    return            
+                    return
+
             #looking for ranked Other
             if message.channel.id == rankedOther.id:
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
@@ -619,15 +625,16 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the word: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
-                        break
                         try:
                             await message.delete()
                         except NotFound as e:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                         else:
                             await asyncio.sleep(15)
                             await response.delete()
+                            break
                 else:
                     return
             else:
