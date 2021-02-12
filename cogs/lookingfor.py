@@ -7,6 +7,7 @@ import time
 import traceback
 import logging
 import shlex
+import re
 
 from discord.ext import commands
 from discord.ext.commands import BucketType
@@ -58,7 +59,10 @@ class lookingfor(commands.Cog):
     async def filter(self, ctx:commands.Context):
         """Base commands for the filtered related word list."""
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
-        if modrole not in ctx.author.roles:
+        adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
+        roles = [modrole, adminrole]
+        user_roles = [role.id for role in ctx.author.roles]
+        if len(set(roles) & set(user_roles)) is 0:
             return
         else:
             if ctx.subcommand_passed is None:
@@ -67,7 +71,10 @@ class lookingfor(commands.Cog):
     @filter.command()
     async def review(self, ctx, category: str):
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
-        if modrole not in ctx.author.roles:
+        adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
+        roles = [modrole, adminrole]
+        user_roles = [role.id for role in ctx.author.roles]
+        if len(set(roles) & set(user_roles)) is 0:
             return
         if category == "ranked":
             message = await ctx.send("Working to fetch the list! This may take a few minutes.")
@@ -103,14 +110,17 @@ class lookingfor(commands.Cog):
     @filter.command()
     async def add(self, ctx, category: str, *, word: str):
         #Assuming that it's some idiot trying to mess up the bot rather than mods.
-        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         normalNA = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-NA"))
         rankedNA = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-NA"))
         normalEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-EU"))
         rankedEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-EU"))
         normalOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-OTHER"))
         rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-OTHER"))
-        if modrole not in ctx.author.roles:
+        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
+        adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
+        roles = [modrole, adminrole]
+        user_roles = [role.id for role in ctx.author.roles]
+        if len(set(roles) & set(user_roles)) is 0:
             return
         else:
             #Normal NA + EU
@@ -147,14 +157,17 @@ class lookingfor(commands.Cog):
     @filter.command()
     async def remove(self, ctx, category:str, *, word: str):
         #Assuming that it's some idiot trying to mess up the bot rather than mods.
-        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         normalNA = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-NA"))
         rankedNA = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-NA"))
         normalEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-EU"))
         rankedEU = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-EU"))
         normalOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "NONRANKED-OTHER"))
         rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-OTHER"))
-        if modrole not in ctx.author.roles:
+        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
+        adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
+        roles = [modrole, adminrole]
+        user_roles = [role.id for role in ctx.author.roles]
+        if len(set(roles) & set(user_roles)) is 0:
             return
         else:
             #Normal NA + EU
