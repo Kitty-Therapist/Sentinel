@@ -313,9 +313,10 @@ class moderation(commands.Cog):
         channel = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOM"))
         pullroomrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "PULLROOMROLE"))
         logs = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOMLOG"))
+        user = ctx.guild.get_member(member.id)
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
-        roles = [modrole, adminrole]
+        roles = [modrole.id, adminrole.id]
         user_roles = [role.id for role in ctx.author.roles]
         if reason == "":
             return await ctx.send("Please make sure to provide a reason why you're pulling the user in!")
