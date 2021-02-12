@@ -145,6 +145,24 @@ class admin(commands.Cog):
                 embed=discord.Embed(title="Invalid Role on Setting Mod Role", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid roleID, please make sure to provide me with the correct roleID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                 await ctx.send(embed=embed)
+                
+    @commands.guild_only()
+    @configure.command()
+    async def adminrole(self, ctx: commands.Context, *, role: discord.Role):
+        if role is None:
+            embed=discord.Embed(title="Error on Setting Admin Role", description=":warning: I was not able to add the roleID that you specified, please make sure that the role that you are trying to specify exists.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            await ctx.send(embed=embed)
+        else:
+            try:
+                Configuration.setConfigVar(ctx.guild.id, "ADMINROLE", role.id)
+                embed = discord.Embed(colour=discord.Colour(0x77dd77),title='Admin Role Successfully Set!', description=f"{role.mention} has been successfully added as mod role.",timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)
+            except (BadArgument) as ex:
+                embed=discord.Embed(title="Invalid Role on Setting Mod Role", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid roleID, please make sure to provide me with the correct roleID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)
 
     @commands.guild_only()
     @configure.command()
