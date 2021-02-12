@@ -60,7 +60,7 @@ class lookingfor(commands.Cog):
         """Base commands for the filtered related word list."""
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
-        roles = [modrole, adminrole]
+        roles = [modrole.id, adminrole.id]
         user_roles = [role.id for role in ctx.author.roles]
         if len(set(roles) & set(user_roles)) is 0:
             return
@@ -72,7 +72,7 @@ class lookingfor(commands.Cog):
     async def review(self, ctx, category: str):
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
-        roles = [modrole, adminrole]
+        roles = [modrole.id, adminrole.id]
         user_roles = [role.id for role in ctx.author.roles]
         if len(set(roles) & set(user_roles)) is 0:
             return
@@ -118,7 +118,7 @@ class lookingfor(commands.Cog):
         rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-OTHER"))
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
-        roles = [modrole, adminrole]
+        roles = [modrole.id, adminrole.id]
         user_roles = [role.id for role in ctx.author.roles]
         if len(set(roles) & set(user_roles)) is 0:
             return
@@ -165,7 +165,7 @@ class lookingfor(commands.Cog):
         rankedOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "RANKED-OTHER"))
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
-        roles = [modrole, adminrole]
+        roles = [modrole.id, adminrole.id]
         user_roles = [role.id for role in ctx.author.roles]
         if len(set(roles) & set(user_roles)) is 0:
             return
