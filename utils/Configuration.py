@@ -25,6 +25,7 @@ CONFIG_TEMPLATE = {
     "PULLROOM": 0,
     "PULLROOMLOG": 0,
     "MODROLE": 0,
+    "ADMINROLE": 0,
     "LOGGING": 0,
     "EMERGENCY": 0,
     "FAKEEMERGENCY": 0,
