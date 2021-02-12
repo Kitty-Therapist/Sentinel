@@ -69,7 +69,7 @@ class moderation(commands.Cog):
                         user_roles = [role.id for role in message.author.roles]
                         if len(set(roles) & set(user_roles)) is 0:
                             cool = await message.channel.send("Looks like you do not have the required XP roles needed to ping the Emergency role. if it's urgent then please contact the mods at <@711678018573303809>")
-                            embed15=discord.Embed(title="Permission Denied to use Emergency Ping", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted to use the Emergency role** in {message.channel.mention}, but they do not have any of the XP roles. They've been informed to let us know via Modmail if it requires our attention. Here is the context: ```{message.content}```", color=0xff7171)
+                            embed15=discord.Embed(title="Permission Denied to use Emergency Ping", description=f"{message.author.name}#{message.author.discriminator} ({message.author.mention}) - (``{message.author.id}``) **attempted to use the Emergency role**, but they do not have any of the XP roles. They've been informed to let us know via Modmail if it requires our attention. Here is the context: ```{message.content}```", color=0xff7171)
                             await logging.send(f"{message.author.id}")
                             await logging.send(embed=embed15)
                             await asyncio.sleep(15)
@@ -141,7 +141,7 @@ class moderation(commands.Cog):
         user_roles = [role.id for role in ctx.author.roles]
         if len(set(roles) & set(user_roles)) is 0:
             cool = await ctx.channel.send("Looks like you do not have the required XP roles needed to ping the Emergency role. if it's urgent then please contact the mods at <@711678018573303809>")
-            embed10=discord.Embed(title= "Permission Denied to use Emergency Ping", description=f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.mention}) - (``{ctx.author.id}``) **attempted to use the Emergency role** in {ctx.channel.mention}, but they do not have any of the XP roles. They've been informed to let us know via Modmail if it requires our attention. Here is the context: ```>emergency {reason}```", color=0xff7171)
+            embed10=discord.Embed(title= "Permission Denied to use Emergency Ping", description=f"{ctx.author.name}#{ctx.author.discriminator} ({ctx.author.mention}) - (``{ctx.author.id}``) **attempted to use the Emergency role**, but they do not have any of the XP roles. They've been informed to let us know via Modmail if it requires our attention. Here is the context: ```>emergency {reason}```", color=0xff7171)
             await logging.send(f"{ctx.author.id}")
             await logging.send(embed=embed10)
             await asyncio.sleep(15)
@@ -235,12 +235,15 @@ class moderation(commands.Cog):
         channel = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOM"))
         pullroomrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "PULLROOMROLE"))
         logs = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOMLOG"))
-        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         verify = await self.bot.fetch_user(member.id)
         user = ctx.guild.get_member(verify.id)
+        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
+        adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
+        roles = [modrole, adminrole]
+        user_roles = [role.id for role in ctx.author.roles]
         if reason == "":
             return await ctx.send("Please make sure to provide a reason why you're pulling the user in!")
-        if modrole not in ctx.author.roles:
+        if len(set(roles) & set(user_roles)) is 0:
             return
         if ctx.author.id == member.id:
             await ctx.send("Sorry, I am unable to help you to pull yourself in the pullroom.")
@@ -311,10 +314,12 @@ class moderation(commands.Cog):
         pullroomrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "PULLROOMROLE"))
         logs = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOMLOG"))
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
-        user = ctx.guild.get_member(member.id)
+        adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
+        roles = [modrole, adminrole]
+        user_roles = [role.id for role in ctx.author.roles]
         if reason == "":
-            return await ctx.send("Please make sure to provide a reason why you're removing the user from the pullroom!")
-        if modrole not in ctx.author.roles:
+            return await ctx.send("Please make sure to provide a reason why you're pulling the user in!")
+        if len(set(roles) & set(user_roles)) is 0:
             return
         if ctx.author.id == member.id:
             await ctx.send("Sorry, I am unable to help you to pull yourself in the pullroom.")
