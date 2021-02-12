@@ -239,7 +239,7 @@ class moderation(commands.Cog):
         user = ctx.guild.get_member(verify.id)
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
-        roles = [modrole, adminrole]
+        roles = [modrole.id, adminrole.id]
         user_roles = [role.id for role in ctx.author.roles]
         if reason == "":
             return await ctx.send("Please make sure to provide a reason why you're pulling the user in!")
