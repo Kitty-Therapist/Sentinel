@@ -21,6 +21,11 @@ CONFIG_TEMPLATE = {
     "RANKED-EU": 0, 
     "NONRANKED-OTHER": 0,
     "RANKED-OTHER": 0,
+    "SCRIM-NA": 0,
+    "SCRIM-EU": 0,
+    "SCRIM-OTHER": 0,
+    "TEAMLF": 0,
+    "PLAYERLF": 0,
     "PULLROOMROLE": 0,
     "PULLROOM": 0,
     "PULLROOMLOG": 0,
@@ -33,7 +38,13 @@ CONFIG_TEMPLATE = {
     "NONRANKED": [],
     "UNSUPPORTED": [],
     "CENSOR": [],
-    "NONEMERGENCY": []
+    "NONEMERGENCY": [],
+    "LOOKINGFORTEAM": [],
+    "LOOKINGFORPLAYERS": [],
+    "SCRIMNA": [],
+    "SCRIMEU": [],
+    "SCRIMOTHER": [],
+    "PHRASES": []
 }
 
 def initialize(bot):
