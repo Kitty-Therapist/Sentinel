@@ -62,8 +62,11 @@ class lookingfor(commands.Cog):
         adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
         roles = [modrole, adminrole]
         user_roles = [role.id for role in ctx.author.roles]
-        if len(set(roles) & set(user_roles)) is 0:
-            return
+        if adminrole not in ctx.author.roles:
+            if modrole in ctx.author.roles:
+                pass
+            else:
+                return
         else:
             if ctx.subcommand_passed is None:
                 await ctx.send("The following categories we have are:\n- normal\n- ranked\n- unsupported\nTo use the command, do the following ``>filter add <category> <word>``")
@@ -78,9 +81,12 @@ class lookingfor(commands.Cog):
             length = len(alist)
             return [ alist[i*length // wanted_parts: (i+1)*length // wanted_parts] 
                     for i in range(wanted_parts) ]
-                    
-        if len(set(roles) & set(user_roles)) is 0:
-            return
+
+        if adminrole not in ctx.author.roles:
+            if modrole in ctx.author.roles:
+                pass
+            else:
+                return
 
         if category == "ranked":
             message = await ctx.send("Working to fetch the list! This may take a few minutes.")
@@ -172,8 +178,11 @@ class lookingfor(commands.Cog):
         adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
         roles = [modrole, adminrole]
         user_roles = [role.id for role in ctx.author.roles]
-        if len(set(roles) & set(user_roles)) is 0:
-            return
+        if adminrole not in ctx.author.roles:
+            if modrole in ctx.author.roles:
+                pass
+            else:
+                return
         else:
             #Normal NA + EU
             if category == "normal":
@@ -279,8 +288,11 @@ class lookingfor(commands.Cog):
         adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
         roles = [modrole, adminrole]
         user_roles = [role.id for role in ctx.author.roles]
-        if len(set(roles) & set(user_roles)) is 0:
-            return
+        if adminrole not in ctx.author.roles:
+            if modrole in ctx.author.roles:
+                pass
+            else:
+                return
         else:
             #Normal NA + EU
             if category == "normal":
