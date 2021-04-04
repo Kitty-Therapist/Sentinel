@@ -178,6 +178,7 @@ class lookingfor(commands.Cog):
         adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
         roles = [modrole, adminrole]
         user_roles = [role.id for role in ctx.author.roles]
+
         if adminrole not in ctx.author.roles:
             if modrole in ctx.author.roles:
                 pass
