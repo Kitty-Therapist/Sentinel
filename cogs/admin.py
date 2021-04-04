@@ -145,7 +145,7 @@ class admin(commands.Cog):
                 embed=discord.Embed(title="Invalid Role on Setting Mod Role", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid roleID, please make sure to provide me with the correct roleID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                 await ctx.send(embed=embed)
-                
+
     @commands.guild_only()
     @configure.command()
     async def adminrole(self, ctx: commands.Context, *, role: discord.Role):
@@ -271,7 +271,97 @@ class admin(commands.Cog):
                 embed=discord.Embed(title="Invalid Channel on Setting Ranked Other Channel", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid channelID, please make sure to provide me with the correct channelID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
                 await ctx.send(embed=embed)  
+
+    @commands.guild_only()
+    @configure.command()
+    async def scrimna(self, ctx: commands.Context, *, channel:discord.TextChannel):
+        if channel is None:
+            embed=discord.Embed(title="Error on Setting Scrim NA Channel", description=":warning: I was not able to add the channelID that you specified, please make sure that the channel that you are trying to specify exists.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            await ctx.send(embed=embed)
+        else:
+            try:
+                Configuration.setConfigVar(ctx.guild.id, "SCRIM-NA", channel.id)
+                embed = discord.Embed(colour=discord.Colour(0x77dd77),title='Scrim NA channel Successfully Set!', description=f"{channel.mention} has been successfully added as scrim NA.",timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)
+            except (BadArgument) as ex:
+                embed=discord.Embed(title="Invalid Channel on Setting Scrim NA Channel", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid channelID, please make sure to provide me with the correct channelID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)
+
+    @commands.guild_only()
+    @configure.command()
+    async def scrimeu(self, ctx: commands.Context, *, channel:discord.TextChannel):
+        if channel is None:
+            embed=discord.Embed(title="Error on Setting Scrim EU Channel", description=":warning: I was not able to add the channelID that you specified, please make sure that the channel that you are trying to specify exists.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            await ctx.send(embed=embed)
+        else:
+            try:
+                Configuration.setConfigVar(ctx.guild.id, "SCRIM-EU", channel.id)
+                embed = discord.Embed(colour=discord.Colour(0x77dd77),title='Scrim EU channel Successfully Set!', description=f"{channel.mention} has been successfully added as scrim EU.",timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)
+            except (BadArgument) as ex:
+                embed=discord.Embed(title="Invalid Channel on Setting Scrim EU Channel", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid channelID, please make sure to provide me with the correct channelID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)  
     
+    @commands.guild_only()
+    @configure.command()
+    async def scrimother(self, ctx: commands.Context, *, channel:discord.TextChannel):
+        if channel is None:
+            embed=discord.Embed(title="Error on Setting Scrim Other Channel", description=":warning: I was not able to add the channelID that you specified, please make sure that the channel that you are trying to specify exists.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            await ctx.send(embed=embed)
+        else:
+            try:
+                Configuration.setConfigVar(ctx.guild.id, "SCRIM-OTHER", channel.id)
+                embed = discord.Embed(colour=discord.Colour(0x77dd77),title='Scrim Other channel Successfully Set!', description=f"{channel.mention} has been successfully added as scrim Other.",timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)
+            except (BadArgument) as ex:
+                embed=discord.Embed(title="Invalid Channel on Setting Scrim Other Channel", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid channelID, please make sure to provide me with the correct channelID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)  
+
+    @commands.guild_only()
+    @configure.command()
+    async def teamlf(self, ctx: commands.Context, *, channel:discord.TextChannel):
+        if channel is None:
+            embed=discord.Embed(title="Error on Setting Team Looking For Channel", description=":warning: I was not able to add the channelID that you specified, please make sure that the channel that you are trying to specify exists.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            await ctx.send(embed=embed)
+        else:
+            try:
+                Configuration.setConfigVar(ctx.guild.id, "TEAMLF", channel.id)
+                embed = discord.Embed(colour=discord.Colour(0x77dd77),title='Team Looking For channel Successfully Set!', description=f"{channel.mention} has been successfully added as Team Looking For.",timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)
+            except (BadArgument) as ex:
+                embed=discord.Embed(title="Invalid Channel on Setting Team Looking For Channel", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid channelID, please make sure to provide me with the correct channelID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)  
+    
+    @commands.guild_only()
+    @configure.command()
+    async def playerlf(self, ctx: commands.Context, *, channel:discord.TextChannel):
+        if channel is None:
+            embed=discord.Embed(title="Error on Setting Player Looking For Channel", description=":warning: I was not able to add the channelID that you specified, please make sure that the channel that you are trying to specify exists.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+            await ctx.send(embed=embed)
+        else:
+            try:
+                Configuration.setConfigVar(ctx.guild.id, "PLAYERLF", channel.id)
+                embed = discord.Embed(colour=discord.Colour(0x77dd77),title='Player Looking For channel Successfully Set!', description=f"{channel.mention} has been successfully added as Player Looking For.",timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)
+            except (BadArgument) as ex:
+                embed=discord.Embed(title="Invalid Channel on Setting Player Looking For Channel", description=f":warning: It would appear that this command: ``{ctx.message.context}\n\n{ex}`` did not contain a valid channelID, please make sure to provide me with the correct channelID and try again.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar_url)
+                await ctx.send(embed=embed)  
+
     @commands.guild_only()
     @configure.command()
     async def logging(self, ctx: commands.Context, *, channel:discord.TextChannel):
