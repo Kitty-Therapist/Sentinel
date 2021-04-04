@@ -391,8 +391,8 @@ class lookingfor(commands.Cog):
         scrimna = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "SCRIM-NA"))
         scrimeu = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "SCRIM-EU"))
         scrimother = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "SCRIM-OTHER"))
-        lookingforteam = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "LOOKINGFORTEAM"))
-        Lookingforplayers = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "LOOKINGFORPLAYERS"))
+        lookingforteam = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "TEAMLF"))
+        Lookingforplayers = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "PLAYERLF"))
         logging = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "LOGGING"))
         modmail = "<@711678018573303809>"
         channelMessage = f"Hey there {after.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to send.\nIf you believe that this may be in error, please contact {modmail} to let us know with the after's content in case of any false positives."
