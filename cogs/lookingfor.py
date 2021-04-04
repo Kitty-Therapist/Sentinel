@@ -395,7 +395,7 @@ class lookingfor(commands.Cog):
         Lookingforplayers = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "PLAYERLF"))
         logging = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "LOGGING"))
         modmail = "<@711678018573303809>"
-        channelMessage = f"Hey there {after.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to send.\nIf you believe that this may be in error, please contact {modmail} to let us know with the after's content in case of any false positives."
+        channelMessage = f"Hey there {after.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to send.\nIf you believe that this may be in error, please contact {modmail} to let us know with the content in case of any false positives."
         loggingtitle = "Filtered Word from Unsupported Category"
         loggingmessage = f"Found message from {after.author.name}#{after.author.discriminator} ({after.author.mention}) (``{after.author.id}``) in {after.channel.mention}:\n\n```{after.content}```\n\n"
 
@@ -435,7 +435,7 @@ class lookingfor(commands.Cog):
                 phrases = Configuration.getConfigVar(after.guild.id, "PHRASES")
                 ranking = Configuration.getConfigVar(after.guild.id, "RANKED")
                 split = shlex.split(after.content.lower())
-                if phrases in after.content.lower():
+                if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
@@ -504,7 +504,7 @@ class lookingfor(commands.Cog):
                 phrases = Configuration.getConfigVar(after.guild.id, "PHRASES")
                 ranking = Configuration.getConfigVar(after.guild.id, "RANKED")
                 split = shlex.split(after.content.lower())
-                if phrases in after.content.lower():
+                if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
@@ -557,7 +557,7 @@ class lookingfor(commands.Cog):
                 phrases = Configuration.getConfigVar(after.guild.id, "PHRASES")
                 ranking = Configuration.getConfigVar(after.guild.id, "RANKED")
                 split = shlex.split(after.content.lower())
-                if phrases in after.content.lower():
+                if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
@@ -610,7 +610,7 @@ class lookingfor(commands.Cog):
                 phrases = Configuration.getConfigVar(after.guild.id, "PHRASES")
                 ranking = Configuration.getConfigVar(after.guild.id, "RANKED")
                 split = shlex.split(after.content.lower())
-                if phrases in after.content.lower():
+                if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
@@ -663,7 +663,7 @@ class lookingfor(commands.Cog):
                 phrases = Configuration.getConfigVar(after.guild.id, "PHRASES")
                 ranking = Configuration.getConfigVar(after.guild.id, "RANKED")
                 split = shlex.split(after.content.lower())
-                if phrases in after.content.lower():
+                if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
@@ -716,7 +716,7 @@ class lookingfor(commands.Cog):
                 phrases = Configuration.getConfigVar(after.guild.id, "PHRASES")
                 ranking = Configuration.getConfigVar(after.guild.id, "RANKED")
                 split = shlex.split(after.content.lower())
-                if phrases in after.content.lower():
+                if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
@@ -768,7 +768,7 @@ class lookingfor(commands.Cog):
                 scrimNorthAmerica = Configuration.getConfigVar(after.guild.id, "SCRIM-NA")
                 phrases = Configuration.getConfigVar(after.guild.id, "PHRASES")
                 split = shlex.split(after.content.lower())
-                if phrases in after.content.lower():
+                if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
@@ -804,7 +804,7 @@ class lookingfor(commands.Cog):
                 scrimEurope = Configuration.getConfigVar(after.guild.id, "SCRIM-EU")
                 phrases = Configuration.getConfigVar(after.guild.id, "PHRASES")
                 split = shlex.split(after.content.lower())
-                if phrases in after.content.lower():
+                if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
@@ -840,7 +840,7 @@ class lookingfor(commands.Cog):
                 scrimOtherRegion = Configuration.getConfigVar(after.guild.id, "SCRIM-OTHER")
                 phrases = Configuration.getConfigVar(after.guild.id, "PHRASES")
                 split = shlex.split(after.content.lower())
-                if phrases in after.content.lower():
+                if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
@@ -876,7 +876,7 @@ class lookingfor(commands.Cog):
                 lfplayers = Configuration.getConfigVar(after.guild.id, "LOOKINGFORPLAYERS")
                 phrases = Configuration.getConfigVar(after.guild.id, "PHRASES")
                 split = shlex.split(after.content.lower())
-                if phrases in after.content.lower():
+                if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
@@ -912,7 +912,7 @@ class lookingfor(commands.Cog):
                 lfteam = Configuration.getConfigVar(after.guild.id, "LOOKINGFORTEAM")
                 phrases = Configuration.getConfigVar(after.guild.id, "PHRASES")
                 split = shlex.split(after.content.lower())
-                if phrases in after.content.lower():
+                if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
@@ -952,33 +952,43 @@ class lookingfor(commands.Cog):
         lookingforteam = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "TEAMLF"))
         logging = message.guild.get_channel(Configuration.getConfigVar(message.guild.id, "LOGGING"))
         modmail = "<@711678018573303809>"
-        channelMessage = f"Hey there {message.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to send.\nIf you believe that this may be in error, please contact {modmail} to let us know with the after's content in case of any false positives."
+        channelMessage = f"Hey there {message.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to send.\nIf you believe that this may be in error, please contact {modmail} to let us know with the content in case of any false positives."
         loggingtitle = "Filtered Word from Unsupported Category"
         loggingmessage = f"Found message from {message.author.name}#{message.author.discriminator} ({message.author.mention}) (``{message.author.id}``) in {message.channel.mention}:\n\n```{message.content}```\n\n"
 
         if normalNA is None:
+            print("pog nothing")
             return
         if rankedNA is None:
+            print("does this work?")
             return
         if normalEU is None:
+            print("wew what about this?")
             return
         if rankedEU is None:
+            print("4")
             return
         if normalOther is None:
+            print("5")
             return
         if rankedOther is None:
+            print("6")
             return
         if scrimna is None:
+            print("7")
             return
         if scrimeu is None:
+            print("8")
             return
         if scrimother is None:
+            print("9")
             return
         if lookingforteam is None:
+            print("10")
             return
         if lookingforplayers is None:
+            print("11")
             return
-
         if message.author.id == 706269652724219987:
             return
         if 679879783630372865 in [role.id for role in message.author.roles]:
@@ -990,7 +1000,7 @@ class lookingfor(commands.Cog):
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 phrases = Configuration.getConfigVar(message.guild.id, "PHRASES")
                 split = shlex.split(message.content.lower())
-                if phrases in message.content.lower():
+                if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
@@ -1018,7 +1028,7 @@ class lookingfor(commands.Cog):
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 phrases = Configuration.getConfigVar(message.guild.id, "PHRASES")
                 split = shlex.split(message.content.lower())
-                if phrases in message.content.lower():
+                if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
@@ -1046,7 +1056,7 @@ class lookingfor(commands.Cog):
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 phrases = Configuration.getConfigVar(message.guild.id, "PHRASES")
                 split = shlex.split(message.content.lower())
-                if phrases in message.content.lower():
+                if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
@@ -1074,7 +1084,7 @@ class lookingfor(commands.Cog):
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 phrases = Configuration.getConfigVar(message.guild.id, "PHRASES")
                 split = shlex.split(message.content.lower())
-                if phrases in message.content.lower():
+                if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
@@ -1102,7 +1112,7 @@ class lookingfor(commands.Cog):
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 phrases = Configuration.getConfigVar(message.guild.id, "PHRASES")
                 split = shlex.split(message.content.lower())
-                if phrases in message.content.lower():
+                if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
@@ -1131,7 +1141,7 @@ class lookingfor(commands.Cog):
                 unsupported = Configuration.getConfigVar(message.guild.id, "UNSUPPORTED")
                 phrases = Configuration.getConfigVar(message.guild.id, "PHRASES")
                 split = shlex.split(message.content.lower())
-                if phrases in message.content.lower():
+                if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
@@ -1166,7 +1176,7 @@ class lookingfor(commands.Cog):
                     scrimNorthA = Configuration.getConfigVar(message.guild.id, "SCRIM-NA")
                     phrases = Configuration.getConfigVar(message.guild.id, "PHRASES")
                     split = shlex.split(message.content.lower())
-                    if phrases in message.content.lower():
+                    if any(word in message.content.lower() for word in phrases):
                         response = await message.channel.send(f"{channelMessage}")
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
@@ -1202,7 +1212,7 @@ class lookingfor(commands.Cog):
                     scrimEur = Configuration.getConfigVar(message.guild.id, "SCRIM-EU")
                     phrases = Configuration.getConfigVar(message.guild.id, "PHRASES")
                     split = shlex.split(message.content.lower())
-                    if phrases in message.content.lower():
+                    if any(word in message.content.lower() for word in phrases):
                         response = await message.channel.send(f"{channelMessage}")
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
@@ -1238,7 +1248,7 @@ class lookingfor(commands.Cog):
                     scrimOth = Configuration.getConfigVar(message.guild.id, "SCRIM-OTHER")
                     phrases = Configuration.getConfigVar(message.guild.id, "PHRASES")
                     split = shlex.split(message.content.lower())
-                    if phrases in message.content.lower():
+                    if any(word in message.content.lower() for word in phrases):
                         response = await message.channel.send(f"{channelMessage}")
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
@@ -1274,7 +1284,7 @@ class lookingfor(commands.Cog):
                     lfplayers = Configuration.getConfigVar(message.guild.id, "LOOKINGFORPLAYERS")
                     phrases = Configuration.getConfigVar(message.guild.id, "PHRASES")
                     split = shlex.split(message.content.lower())
-                    if phrases in message.content.lower():
+                    if any(word in message.content.lower() for word in phrases):
                         response = await message.channel.send(f"{channelMessage}")
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
@@ -1310,7 +1320,7 @@ class lookingfor(commands.Cog):
                     lfteam = Configuration.getConfigVar(message.guild.id, "LOOKINGFORTEAM")
                     phrases = Configuration.getConfigVar(message.guild.id, "PHRASES")
                     split = shlex.split(message.content.lower())
-                    if phrases in message.content.lower():
+                    if any(word in message.content.lower() for word in phrases):
                         response = await message.channel.send(f"{channelMessage}")
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
