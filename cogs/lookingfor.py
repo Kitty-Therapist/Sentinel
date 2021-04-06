@@ -59,14 +59,8 @@ class lookingfor(commands.Cog):
     @commands.has_permissions(manage_roles=True)
     async def filter(self, ctx:commands.Context):
         """Base commands for the filtered related word list."""
-        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
-        adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
-        roles = [modrole, adminrole]
-        user_roles = [role.id for role in ctx.author.roles]
-
-        else:
-            if ctx.subcommand_passed is None:
-                await ctx.send("The following categories we have are:\n- normal\n- ranked\n- unsupported\nTo use the command, do the following ``>filter add <category> <word>``")
+        if ctx.subcommand_passed is None:
+            await ctx.send("The following categories we have are:\n- normal\n- ranked\n- unsupported\nTo use the command, do the following ``>filter add <category> <word>``")
     
     @filter.command()
     async def review(self, ctx, category: str):
