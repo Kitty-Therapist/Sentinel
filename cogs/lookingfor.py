@@ -56,37 +56,25 @@ class lookingfor(commands.Cog):
 
 
     @commands.group()
+    @commands.has_permissions(manage_roles=True)
     async def filter(self, ctx:commands.Context):
         """Base commands for the filtered related word list."""
         modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
         adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
         roles = [modrole, adminrole]
         user_roles = [role.id for role in ctx.author.roles]
-        if adminrole not in ctx.author.roles:
-            if modrole in ctx.author.roles:
-                pass
-            else:
-                return
+
         else:
             if ctx.subcommand_passed is None:
                 await ctx.send("The following categories we have are:\n- normal\n- ranked\n- unsupported\nTo use the command, do the following ``>filter add <category> <word>``")
     
     @filter.command()
     async def review(self, ctx, category: str):
-        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
-        adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
-        roles = [modrole, adminrole]
-        user_roles = [role.id for role in ctx.author.roles]
         def split_list(alist, wanted_parts=1):
             length = len(alist)
             return [ alist[i*length // wanted_parts: (i+1)*length // wanted_parts] 
                     for i in range(wanted_parts) ]
 
-        if adminrole not in ctx.author.roles:
-            if modrole in ctx.author.roles:
-                pass
-            else:
-                return
 
         if category == "ranked":
             message = await ctx.send("Working to fetch the list! This may take a few minutes.")
@@ -174,101 +162,90 @@ class lookingfor(commands.Cog):
         scrimOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "SCRIM-OTHER"))
         lookingfteam = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "TEAMLF"))
         lookingfplayers = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PLAYERLF"))
-        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
-        adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
-        roles = [modrole, adminrole]
-        user_roles = [role.id for role in ctx.author.roles]
 
-        if adminrole not in ctx.author.roles:
-            if modrole in ctx.author.roles:
-                pass
+        if category == "normal":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "NONRANKED")
+            if word in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out in any channel(s) other than {normalNA.mention}, {normalEU.mention}, and {normalOther.mention}!")
+            else: 
+                blacklist.append(word)
+                await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out in any channel(s) other than {normalNA.mention}, {normalEU.mention}, and {normalOther.mention}!")
+                Configuration.setConfigVar(ctx.guild.id, "NONRANKED", blacklist)
+
+        #Ranked NA + EU
+        if category == "ranked":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "RANKED")
+            if word in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out in any channel(s) other than {rankedNA.mention}, {rankedEU.mention}, and {rankedOther.mention}!")
             else:
-                return
-        else:
-            #Normal NA + EU
-            if category == "normal":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "NONRANKED")
-                if word in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out in any channel(s) other than {normalNA.mention}, {normalEU.mention}, and {normalOther.mention}!")
-                else: 
-                    blacklist.append(word)
-                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out in any channel(s) other than {normalNA.mention}, {normalEU.mention}, and {normalOther.mention}!")
-                    Configuration.setConfigVar(ctx.guild.id, "NONRANKED", blacklist)
+                blacklist.append(word)
+                await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out in any channel(s) other than {rankedNA.mention}, {rankedEU.mention}, and {rankedOther.mention}!")
+                Configuration.setConfigVar(ctx.guild.id, "RANKED", blacklist)
+        
+        #Unsupported related things
+        if category == "unsupported":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "UNSUPPORTED")
+            if word in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
+            else:
+                blacklist.append(word)
+                await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "UNSUPPORTED", blacklist)
+        
+        if category == "lookingforteam":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "LOOKINGFORTEAM")
+            if word in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
+            else:
+                blacklist.append(word)
+                await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "LOOKINGFORTEAM", blacklist)
 
-            #Ranked NA + EU
-            if category == "ranked":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "RANKED")
-                if word in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out in any channel(s) other than {rankedNA.mention}, {rankedEU.mention}, and {rankedOther.mention}!")
-                else:
-                    blacklist.append(word)
-                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out in any channel(s) other than {rankedNA.mention}, {rankedEU.mention}, and {rankedOther.mention}!")
-                    Configuration.setConfigVar(ctx.guild.id, "RANKED", blacklist)
-            
-            #Unsupported related things
-            if category == "unsupported":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "UNSUPPORTED")
-                if word in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
-                else:
-                    blacklist.append(word)
-                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "UNSUPPORTED", blacklist)
-            
-            if category == "lookingforteam":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "LOOKINGFORTEAM")
-                if word in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
-                else:
-                    blacklist.append(word)
-                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "LOOKINGFORTEAM", blacklist)
+        if category == "lookingforplayers":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "LOOKINGFORPLAYERS")
+            if word in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
+            else:
+                blacklist.append(word)
+                await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "LOOKINGFORPLAYERS", blacklist)
 
-            if category == "lookingforplayers":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "LOOKINGFORPLAYERS")
-                if word in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
-                else:
-                    blacklist.append(word)
-                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "LOOKINGFORPLAYERS", blacklist)
-
-            if category == "scrimna":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMNA")
-                if word in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
-                else:
-                    blacklist.append(word)
-                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "SCRIMNA", blacklist)
-            
-            if category == "scrimeu":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMEU")
-                if word in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
-                else:
-                    blacklist.append(word)
-                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "SCRIMEU", blacklist)
-            
-            if category == "scrimother":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMOTHER")
-                if word in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
-                else:
-                    blacklist.append(word)
-                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "SCRIMOTHER", blacklist)         
-            
-            if category == "phrases":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "PHRASES")
-                count = len(word.split())
-                if count <= 1:
-                    await ctx.send("Your phrase needs to be more than one word!")
-                else:
-                    blacklist.append(word)
-                    await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "PHRASES", blacklist)
+        if category == "scrimna":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMNA")
+            if word in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
+            else:
+                blacklist.append(word)
+                await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "SCRIMNA", blacklist)
+        
+        if category == "scrimeu":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMEU")
+            if word in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
+            else:
+                blacklist.append(word)
+                await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "SCRIMEU", blacklist)
+        
+        if category == "scrimother":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMOTHER")
+            if word in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already added to the list for me to keep a eye out!")
+            else:
+                blacklist.append(word)
+                await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "SCRIMOTHER", blacklist)         
+        
+        if category == "phrases":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "PHRASES")
+            count = len(word.split())
+            if count <= 1:
+                await ctx.send("Your phrase needs to be more than one word!")
+            else:
+                blacklist.append(word)
+                await ctx.send(f"I have added ``{word}`` to the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "PHRASES", blacklist)
 
     
     @filter.command()
@@ -285,100 +262,90 @@ class lookingfor(commands.Cog):
         scrimOther = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "SCRIM-OTHER"))
         lookingfteam = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "TEAMLF"))
         lookingfplayers = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PLAYERLF"))
-        modrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "MODROLE"))
-        adminrole = ctx.guild.get_role(Configuration.getConfigVar(ctx.guild.id, "ADMINROLE"))
-        roles = [modrole, adminrole]
-        user_roles = [role.id for role in ctx.author.roles]
-        if adminrole not in ctx.author.roles:
-            if modrole in ctx.author.roles:
-                pass
+
+        if category == "normal":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "NONRANKED")
+            if word not in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already removed from the list and I'm not currently keeping an eye out in any channel(s) other than {normalNA}, {normalEU}, and {normalOther} for {word}!")
+            else: 
+                blacklist.remove(word)
+                await ctx.send(f"I have removed ``{word}`` from the list I will no longer keep an eye out in any channel(s) other than {normalNA}, {normalEU}, and {normalOther} for {word}!")
+                Configuration.setConfigVar(ctx.guild.id, "NONRANKED", blacklist)
+
+        #Ranked NA + EU
+        if category == "ranked":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "RANKED")
+            if word not in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already removed from the list and I'm not currently keeping an eye out in any channel(s) other than {rankedNA}, {rankedEU}, and {rankedOther} for {word}!")
             else:
-                return
-        else:
-            #Normal NA + EU
-            if category == "normal":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "NONRANKED")
-                if word not in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already removed from the list and I'm not currently keeping an eye out in any channel(s) other than {normalNA}, {normalEU}, and {normalOther} for {word}!")
-                else: 
-                    blacklist.remove(word)
-                    await ctx.send(f"I have removed ``{word}`` from the list I will no longer keep an eye out in any channel(s) other than {normalNA}, {normalEU}, and {normalOther} for {word}!")
-                    Configuration.setConfigVar(ctx.guild.id, "NONRANKED", blacklist)
+                blacklist.remove(word)
+                await ctx.send(f"I have removed ``{word}`` to the list I will no longer keep an eye out in any channel(s) other than {rankedNA}, {rankedEU}, and {rankedOther} for {word}!")
+                Configuration.setConfigVar(ctx.guild.id, "RANKED", blacklist)
 
-            #Ranked NA + EU
-            if category == "ranked":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "RANKED")
-                if word not in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already removed from the list and I'm not currently keeping an eye out in any channel(s) other than {rankedNA}, {rankedEU}, and {rankedOther} for {word}!")
-                else:
-                    blacklist.remove(word)
-                    await ctx.send(f"I have removed ``{word}`` to the list I will no longer keep an eye out in any channel(s) other than {rankedNA}, {rankedEU}, and {rankedOther} for {word}!")
-                    Configuration.setConfigVar(ctx.guild.id, "RANKED", blacklist)
+        #Unsupported related things
+        if category == "unsupported":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "UNSUPPORTED")
+            if word not in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already removed from the list and I'm not currently keeping an eye out in any channels for {word}.")
+            else:
+                blacklist.remove(word)
+                await ctx.send(f"I have removed ``{word}`` to the list I will no longer keep an eye out in any channels for {word}.")
+                Configuration.setConfigVar(ctx.guild.id, "UNSUPPORTED", blacklist)
 
-            #Unsupported related things
-            if category == "unsupported":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "UNSUPPORTED")
-                if word not in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already removed from the list and I'm not currently keeping an eye out in any channels for {word}.")
-                else:
-                    blacklist.remove(word)
-                    await ctx.send(f"I have removed ``{word}`` to the list I will no longer keep an eye out in any channels for {word}.")
-                    Configuration.setConfigVar(ctx.guild.id, "UNSUPPORTED", blacklist)
+        if category == "lookingforteam":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "LOOKINGFORTEAM")
+            if word not in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already removed from the list for me to keep a eye out!")
+            else:
+                blacklist.remove(word)
+                await ctx.send(f"I have remove ``{word}`` from the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "LOOKINGFORTEAM", blacklist)
 
-            if category == "lookingforteam":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "LOOKINGFORTEAM")
-                if word not in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already removed from the list for me to keep a eye out!")
-                else:
-                    blacklist.remove(word)
-                    await ctx.send(f"I have remove ``{word}`` from the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "LOOKINGFORTEAM", blacklist)
+        if category == "lookingforplayers":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "LOOKINGFORPLAYERS")
+            if word not in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already removed from the list for me to keep a eye out!")
+            else:
+                blacklist.remove(word)
+                await ctx.send(f"I have removed ``{word}`` from the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "LOOKINGFORPLAYERS", blacklist)
 
-            if category == "lookingforplayers":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "LOOKINGFORPLAYERS")
-                if word not in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already removed from the list for me to keep a eye out!")
-                else:
-                    blacklist.remove(word)
-                    await ctx.send(f"I have removed ``{word}`` from the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "LOOKINGFORPLAYERS", blacklist)
+        if category == "scrimna":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMNA")
+            if word not in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already removed from the list for me to keep a eye out!")
+            else:
+                blacklist.remove(word)
+                await ctx.send(f"I have removed ``{word}`` from the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "SCRIMNA", blacklist)
+        
+        if category == "scrimeu":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMEU")
+            if word not in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already removed from the list for me to keep a eye out!")
+            else:
+                blacklist.remove(word)
+                await ctx.send(f"I have removed ``{word}`` from the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "SCRIMEU", blacklist)
+        
+        if category == "scrimother":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMOTHER")
+            if word not in blacklist:
+                await ctx.send(f"Looks like that ``{word}`` is already removed from the list for me to keep a eye out!")
+            else:
+                blacklist.remove(word)
+                await ctx.send(f"I have removed ``{word}`` from the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "SCRIMOTHER", blacklist)   
 
-            if category == "scrimna":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMNA")
-                if word not in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already removed from the list for me to keep a eye out!")
-                else:
-                    blacklist.remove(word)
-                    await ctx.send(f"I have removed ``{word}`` from the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "SCRIMNA", blacklist)
-            
-            if category == "scrimeu":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMEU")
-                if word not in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already removed from the list for me to keep a eye out!")
-                else:
-                    blacklist.remove(word)
-                    await ctx.send(f"I have removed ``{word}`` from the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "SCRIMEU", blacklist)
-            
-            if category == "scrimother":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "SCRIMOTHER")
-                if word not in blacklist:
-                    await ctx.send(f"Looks like that ``{word}`` is already removed from the list for me to keep a eye out!")
-                else:
-                    blacklist.remove(word)
-                    await ctx.send(f"I have removed ``{word}`` from the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "SCRIMOTHER", blacklist)   
-
-            if category == "phrases":
-                blacklist = Configuration.getConfigVar(ctx.guild.id, "PHRASES")
-                count = len(word.split())
-                if count <= 1:
-                    await ctx.send("This is the phrasing filtering, so it should have more than one word.")
-                else:
-                    blacklist.remove(word)
-                    await ctx.send(f"I have removed ``{word}`` to the list for me to keep a eye out!")
-                    Configuration.setConfigVar(ctx.guild.id, "PHRASES", blacklist)
+        if category == "phrases":
+            blacklist = Configuration.getConfigVar(ctx.guild.id, "PHRASES")
+            count = len(word.split())
+            if count <= 1:
+                await ctx.send("This is the phrasing filtering, so it should have more than one word.")
+            else:
+                blacklist.remove(word)
+                await ctx.send(f"I have removed ``{word}`` to the list for me to keep a eye out!")
+                Configuration.setConfigVar(ctx.guild.id, "PHRASES", blacklist)
 
     ##This is for the on message events. Some things are hard-coded and I need to look into this.
     @commands.Cog.listener()
