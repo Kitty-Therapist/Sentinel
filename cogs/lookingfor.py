@@ -399,7 +399,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -468,7 +468,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: *{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -521,7 +521,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -574,7 +574,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -627,7 +627,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -680,7 +680,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -732,7 +732,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in scrimNorthAmerica):
@@ -768,7 +768,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in scrimEurope):
@@ -804,7 +804,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in scrimOtherRegion):
@@ -840,7 +840,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in lfplayers):
@@ -876,7 +876,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(after.content.lower())
                 if any(word in after.content.lower() for word in phrases):
                     response = await after.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in lfteam):
@@ -964,7 +964,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -992,7 +992,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -1020,7 +1020,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -1048,7 +1048,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -1076,7 +1076,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -1105,7 +1105,7 @@ class lookingfor(commands.Cog):
                 split = shlex.split(message.content.lower())
                 if any(word in message.content.lower() for word in phrases):
                     response = await message.channel.send(f"{channelMessage}")
-                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                    embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
                     await logging.send(embed=embed)
                 for word in (w.lower() for w in unsupported):
@@ -1140,7 +1140,7 @@ class lookingfor(commands.Cog):
                     split = shlex.split(message.content.lower())
                     if any(word in message.content.lower() for word in phrases):
                         response = await message.channel.send(f"{channelMessage}")
-                        embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                        embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                     for word in (w.lower() for w in scrimNorthA):
@@ -1176,7 +1176,7 @@ class lookingfor(commands.Cog):
                     split = shlex.split(message.content.lower())
                     if any(word in message.content.lower() for word in phrases):
                         response = await message.channel.send(f"{channelMessage}")
-                        embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                        embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                     for word in (w.lower() for w in scrimEur):
@@ -1212,7 +1212,7 @@ class lookingfor(commands.Cog):
                     split = shlex.split(message.content.lower())
                     if any(word in message.content.lower() for word in phrases):
                         response = await message.channel.send(f"{channelMessage}")
-                        embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
+                        embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                     for word in (w.lower() for w in scrimOth):
