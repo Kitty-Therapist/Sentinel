@@ -354,7 +354,7 @@ class lookingfor(commands.Cog):
         scrimeu = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "SCRIM-EU"))
         scrimother = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "SCRIM-OTHER"))
         lookingforteam = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "TEAMLF"))
-        Lookingforplayers = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "PLAYERLF"))
+        lookingforplayers = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "PLAYERLF"))
         logging = after.guild.get_channel(Configuration.getConfigVar(after.guild.id, "LOGGING"))
         modmail = "<@711678018573303809>"
         channelMessage = f"Hey there {after.author.mention}, I'm afraid that we don't support the type of the request that you're attempting to send.\nIf you believe that this may be in error, please contact {modmail} to let us know with the content in case of any false positives."
@@ -402,6 +402,17 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await after.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -471,6 +482,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: *{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await after.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                   else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -524,6 +545,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await after.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                   else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                    
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -577,6 +608,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await after.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                   else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                    
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -630,6 +671,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await after.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -683,6 +734,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await after.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                    
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -735,6 +796,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await after.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                    
                 for word in (w.lower() for w in scrimNorthAmerica):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -771,6 +842,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await after.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                    
                 for word in (w.lower() for w in scrimEurope):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -807,6 +888,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await after.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                    
                 for word in (w.lower() for w in scrimOtherRegion):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -843,6 +934,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await after.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                    
                 for word in (w.lower() for w in lfplayers):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -879,6 +980,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{after.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await after.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                    
                 for word in (w.lower() for w in lfteam):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -967,6 +1078,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await message.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                    
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -995,6 +1116,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await message.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                       
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -1023,6 +1154,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await message.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                       
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -1051,6 +1192,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await message.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                       
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -1078,7 +1229,17 @@ class lookingfor(commands.Cog):
                     response = await message.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
-                    await logging.send(embed=embed)
+                    await logging.send(embed=embed
+                    try:
+                        await message.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                                          
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -1108,6 +1269,16 @@ class lookingfor(commands.Cog):
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
                     await logging.send(embed=embed)
+                    try:
+                        await message.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break                                          
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -1143,6 +1314,16 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
+                        try:
+                        await message.delete()
+                    except NotFound as e:
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break
+                    else: 
+                        await asyncio.sleep(15)
+                        await response.delete()
+                        break   
                     for word in (w.lower() for w in scrimNorthA):
                         if word in split:
                             response = await message.channel.send(f"{channelMessage}")
@@ -1179,6 +1360,16 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
+                        try:
+                            await message.delete()
+                        except NotFound as e:
+                            await asyncio.sleep(15)
+                            await response.delete()
+                            break
+                        else: 
+                            await asyncio.sleep(15)
+                            await response.delete()
+                            break                           
                     for word in (w.lower() for w in scrimEur):
                         if word in split:
                             response = await message.channel.send(f"{channelMessage}")
@@ -1215,6 +1406,16 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
+                        try:
+                            await message.delete()
+                        except NotFound as e:
+                            await asyncio.sleep(15)
+                            await response.delete()
+                            break
+                        else: 
+                            await asyncio.sleep(15)
+                            await response.delete()
+                            break  
                     for word in (w.lower() for w in scrimOth):
                         if word in split:
                             response = await message.channel.send(f"{channelMessage}")
@@ -1251,6 +1452,16 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
+                        try:
+                            await message.delete()
+                        except NotFound as e:
+                            await asyncio.sleep(15)
+                            await response.delete()
+                            break
+                        else: 
+                            await asyncio.sleep(15)
+                            await response.delete()
+                            break  
                     for word in (w.lower() for w in lfplayers):
                         if word in split:
                             response = await message.channel.send(f"{channelMessage}")
@@ -1287,6 +1498,16 @@ class lookingfor(commands.Cog):
                         embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{phrases}**", color=0xff7171)
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
+                        try:
+                            await message.delete()
+                        except NotFound as e:
+                            await asyncio.sleep(15)
+                            await response.delete()
+                            break
+                        else: 
+                            await asyncio.sleep(15)
+                            await response.delete()
+                            break  
                     for word in (w.lower() for w in lfteam):
                         if word in split:
                             response = await message.channel.send(f"{channelMessage}")
