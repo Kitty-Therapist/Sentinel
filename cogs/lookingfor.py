@@ -488,7 +488,7 @@ class lookingfor(commands.Cog):
                         await asyncio.sleep(15)
                         await response.delete()
                         break
-                   else: 
+                    else: 
                         await asyncio.sleep(15)
                         await response.delete()
                         break
@@ -551,7 +551,7 @@ class lookingfor(commands.Cog):
                         await asyncio.sleep(15)
                         await response.delete()
                         break
-                   else: 
+                    else: 
                         await asyncio.sleep(15)
                         await response.delete()
                         break                    
@@ -614,7 +614,7 @@ class lookingfor(commands.Cog):
                         await asyncio.sleep(15)
                         await response.delete()
                         break
-                   else: 
+                    else: 
                         await asyncio.sleep(15)
                         await response.delete()
                         break                    
@@ -1229,7 +1229,7 @@ class lookingfor(commands.Cog):
                     response = await message.channel.send(f"{channelMessage}")
                     embed = discord.Embed(title=f"{loggingtitle}", description=f"{loggingmessage}It contained the following phrase: **{word}**", color=0xff7171)
                     await logging.send(f"{message.author.id}")
-                    await logging.send(embed=embed
+                    await logging.send(embed=embed)
                     try:
                         await message.delete()
                     except NotFound as e:
@@ -1315,15 +1315,15 @@ class lookingfor(commands.Cog):
                         await logging.send(f"{message.author.id}")
                         await logging.send(embed=embed)
                         try:
-                        await message.delete()
-                    except NotFound as e:
-                        await asyncio.sleep(15)
-                        await response.delete()
-                        break
-                    else: 
-                        await asyncio.sleep(15)
-                        await response.delete()
-                        break   
+                            await message.delete()
+                        except NotFound as e:
+                            await asyncio.sleep(15)
+                            await response.delete()
+                            break
+                        else: 
+                            await asyncio.sleep(15)
+                            await response.delete()
+                            break   
                     for word in (w.lower() for w in scrimNorthA):
                         if word in split:
                             response = await message.channel.send(f"{channelMessage}")
