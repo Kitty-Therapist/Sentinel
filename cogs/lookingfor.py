@@ -407,11 +407,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     
                 for word in (w.lower() for w in unsupported):
                     if word in split:
@@ -487,11 +487,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -550,11 +550,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                    
+                        return                   
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -613,11 +613,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                    
+                        return                   
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -676,11 +676,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                
+                        return                
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -739,11 +739,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                    
+                        return                   
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -801,11 +801,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                    
+                        return                   
                 for word in (w.lower() for w in scrimNorthAmerica):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -847,11 +847,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                    
+                        return                  
                 for word in (w.lower() for w in scrimEurope):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -893,11 +893,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                    
+                        return                    
                 for word in (w.lower() for w in scrimOtherRegion):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -939,11 +939,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                    
+                        return                    
                 for word in (w.lower() for w in lfplayers):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -985,11 +985,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                    
+                        return                    
                 for word in (w.lower() for w in lfteam):
                     if word in split:
                         response = await after.channel.send(f"{channelMessage}")
@@ -1083,11 +1083,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                    
+                        return                    
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -1121,11 +1121,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                       
+                        return                      
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -1159,11 +1159,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                       
+                        return                      
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -1197,11 +1197,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                       
+                        return                      
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -1235,11 +1235,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                                          
+                        return                                          
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -1274,11 +1274,11 @@ class lookingfor(commands.Cog):
                     except NotFound as e:
                         await asyncio.sleep(15)
                         await response.delete()
-                        break
+                        return
                     else: 
                         await asyncio.sleep(15)
                         await response.delete()
-                        break                                          
+                        return                                          
                 for word in (w.lower() for w in unsupported):
                     if word in split:
                         response = await message.channel.send(f"{channelMessage}")
@@ -1319,11 +1319,11 @@ class lookingfor(commands.Cog):
                         except NotFound as e:
                             await asyncio.sleep(15)
                             await response.delete()
-                            break
+                            return
                         else: 
                             await asyncio.sleep(15)
                             await response.delete()
-                            break   
+                            return  
                     for word in (w.lower() for w in scrimNorthA):
                         if word in split:
                             response = await message.channel.send(f"{channelMessage}")
@@ -1365,11 +1365,11 @@ class lookingfor(commands.Cog):
                         except NotFound as e:
                             await asyncio.sleep(15)
                             await response.delete()
-                            break
+                            return
                         else: 
                             await asyncio.sleep(15)
                             await response.delete()
-                            break                           
+                            return                           
                     for word in (w.lower() for w in scrimEur):
                         if word in split:
                             response = await message.channel.send(f"{channelMessage}")
@@ -1411,11 +1411,11 @@ class lookingfor(commands.Cog):
                         except NotFound as e:
                             await asyncio.sleep(15)
                             await response.delete()
-                            break
+                            return
                         else: 
                             await asyncio.sleep(15)
                             await response.delete()
-                            break  
+                            return 
                     for word in (w.lower() for w in scrimOth):
                         if word in split:
                             response = await message.channel.send(f"{channelMessage}")
@@ -1457,11 +1457,11 @@ class lookingfor(commands.Cog):
                         except NotFound as e:
                             await asyncio.sleep(15)
                             await response.delete()
-                            break
+                            return
                         else: 
                             await asyncio.sleep(15)
                             await response.delete()
-                            break  
+                            return  
                     for word in (w.lower() for w in lfplayers):
                         if word in split:
                             response = await message.channel.send(f"{channelMessage}")
@@ -1503,11 +1503,11 @@ class lookingfor(commands.Cog):
                         except NotFound as e:
                             await asyncio.sleep(15)
                             await response.delete()
-                            break
+                            return
                         else: 
                             await asyncio.sleep(15)
                             await response.delete()
-                            break  
+                            return 
                     for word in (w.lower() for w in lfteam):
                         if word in split:
                             response = await message.channel.send(f"{channelMessage}")
