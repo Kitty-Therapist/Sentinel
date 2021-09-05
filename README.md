@@ -1,4 +1,4 @@
 # Valorant-LF
 
 Requirements needed:
-- discord.JS v13
+- discord.js

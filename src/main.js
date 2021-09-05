@@ -21,4 +21,6 @@ for (const file of events) {
     }
 } // Event handler
 
+
+
 client.login(config.token);
