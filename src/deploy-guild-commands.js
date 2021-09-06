@@ -7,12 +7,20 @@ const commands = [];
 
 const rest = new REST({ version: '9' }).setToken(token); // Puts through a route using the v9 of the gateway with the token
 
-const cmds = fs.readdirSync('./commands').filter(file => file.endsWith('.js')); 
+// const cmds = fs.readdirSync('./commands').filter(file => file.endsWith('.js')); 
 
-for (const file of cmds) {
-    const command = require(`./commands/${file}`);
-    commands.push(command.data.toJSON());
-} // Reading Command Files
+// // for (const file of cmds) {
+// //     const command = require(`./commands/${file}`);
+// //     commands.push(command.data.toJSON());
+// // } // Reading Command Files
+
+fs.readdirSync('./commands/').forEach(dir => {
+    const cmds = fs.readdirSync(`./commands/${dir}/`).filter(file => file.endsWith(".js"));
+    for (let file of cmds) {
+        const cmd = require(`./commands/${dir}/${file}`)
+        commands.push(cmd.data.toJSON());
+    }
+})
 
 (async () => {
     try {

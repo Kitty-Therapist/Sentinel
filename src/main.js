@@ -4,13 +4,21 @@ const fs = require('fs');
 const config = require('../config.json');
 
 client.commands = new Collection();
-const cmds = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+// const cmds = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
-for (const file of cmds) {
-    const command =  require(`./commands/${file}`);
-    client.commands.set(command.data.name, command);
-} // Command handler
+// for (const file of cmds) {
+//     const command =  require(`./commands/${file}`);
+//     client.commands.set(command.data.name, command);
+// } // Command handler
+
+fs.readdirSync("./commands/").forEach(dir => {
+    const cmds = fs.readdirSync(`./commands/${dir}/`).filter(file => file.endsWith(".js"));
+    for (let file of cmds) {
+        let pull = require(`./commands/${dir}/${file}`)
+        client.commands.set(pull.data.name, pull);
+    }
+})
 
 for (const file of events) {
     const event = require(`./events/${file}`);
