@@ -23,7 +23,7 @@ bot.remove_command('help')
 bot.starttime = datetime.datetime.now()
 bot.startup_done = False
 
-initial_extensions = ['lookingfor', 'moderation', 'admin']
+initial_extensions = ['moderation', 'admin']
 
 if not os.path.exists('config'):
     os.makedirs('config')
