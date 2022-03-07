@@ -40,8 +40,6 @@ class moderation(commands.Cog):
         if fake is None:
             return
         if message.guild.id == 679875946597056683:
-            if 684144438251225099 in [role.id for role in message.author.roles]:
-                return
             if message.author.id == 706269652724219987:
                 return
             else:
