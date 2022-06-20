@@ -27,10 +27,15 @@ class pullroom(commands.Cog):
             await ctx.send("Sorry, I am unable to help you to pull yourself in the pullroom.")
         if reason == "":
             await ctx.send("Please specify a reason that you are pulling the user in!")
+            return
         if pullroomrole is None:
                 embed=discord.Embed(title="Unknown Role Error", description=f":warning: I was not able to add {member.name}#{member.discriminator} (``{member.id}``) to the pullroom. It seems like that the role required is not configured, please have a Senior Moderator or a Bot Developer to fix this. \n\nIf this persists, contact Ghoul.", color=0xfff952,timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 embed.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.avatar)
                 await ctx.send(embed=embed)
+                return
+        if pullroomrole in user.roles:
+            await ctx.send("This user already got the pullroom role, likely from the old systems. Remove the role and try again.")
+            return
         else:
             if pullroomrole not in user.roles:
                 try:
@@ -69,10 +74,14 @@ class pullroom(commands.Cog):
         user = ctx.guild.get_member(verify.id)
         if reason == "":
             await ctx.send("Please specify a reason that you are removing the user from pullroom!")
+            return
         if len(set(roles) & set(user_roles)) == 0:
             return
         if ctx.author.id == member.id:
             await ctx.send("Sorry, I am unable to help you to pull yourself out of the pullroom.")
+        if pullroomrole not in user.roles:
+            await ctx.send("This user already have had their role removed, likely manually by another moderator.")
+            return
         if ctx.channel.type == discord.ChannelType.private_thread:
             await ctx.send(f"Removing ``{user.name}#{user.discriminator}`` (``{user.id}``) from the pullroom.")
             if pullroomrole is None:
