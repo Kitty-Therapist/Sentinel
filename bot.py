@@ -35,10 +35,6 @@ async def on_ready():
     await logs.send(embed=embed)
     print(f'\n\nLogged in as: {client.user.name} - {client.user.id}' + f'\nVersion: {discord.__version__}\n')
     await client.change_presence(activity=discord.Activity(name='VALORANT', type=discord.ActivityType.watching))
-    
-if not os.path.exists('config'):
-    os.makedirs('config')
-
 
 # Start the bot
 if __name__ == "__main__":
