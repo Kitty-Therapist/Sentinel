@@ -9,7 +9,11 @@ from discord.ext import commands
 class pullroom(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
+    
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        if message.author.id == 872122826323292160:
+            return
     @commands.command()
     @commands.guild_only()
     async def pull(self, ctx: commands.Context, member: discord.User, *, reason=""):
