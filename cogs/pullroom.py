@@ -1,6 +1,7 @@
 import discord
 import datetime
 import time
+import asyncio
 from utils import Configuration
 
 from discord.ext import commands
@@ -60,6 +61,9 @@ class pullroom(commands.Cog):
                     embed3.set_footer(text=f"Issued by {ctx.author.name}#{ctx.author.discriminator} ({ctx.author.id})", icon_url=ctx.author.display_avatar)
                     embed3.set_thumbnail(url=member.display_avatar)
                     await logging.send(embed=embed3)
+                    await asyncio.sleep(3600)
+                    if pullroom in user.roles:
+                        await user.remove_roles(pullroomrole)
 
     @commands.command()
     @commands.guild_only()
