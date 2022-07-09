@@ -12,8 +12,16 @@ class pullroom(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author.id == 872122826323292160:
-            return
+        print(f"Message from {message.author.name} in {message.guild.id} returned.")
+        self.bot.process_commands(message)
+
+    @commands.command()
+    @commands.guild_only()
+    async def testcommand(self, ctx: commands.Context):
+        print ("hello")
+        await ctx.send("Test is done.")
+    ### The two command related stuff is for debugging purposes only. 
+    
     @commands.command()
     @commands.guild_only()
     async def pull(self, ctx: commands.Context, member: discord.User, *, reason=""):
