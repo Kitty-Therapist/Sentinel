@@ -10,18 +10,6 @@ class pullroom(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        print(f"Message from {message.author.name} in {message.guild.id} returned.")
-        self.bot.process_commands(message)
-
-    @commands.command()
-    @commands.guild_only()
-    async def testcommand(self, ctx: commands.Context):
-        print ("hello")
-        await ctx.send("Test is done.")
-    ### The two command related stuff is for debugging purposes only. 
-    
     @commands.command()
     async def restart (self, ctx: commands.Context):
         if ctx.author.id == 298618155281154058:
