@@ -23,6 +23,13 @@ class pullroom(commands.Cog):
     ### The two command related stuff is for debugging purposes only. 
     
     @commands.command()
+    async def restart (self, ctx: commands.Context):
+        if ctx.author.id == 298618155281154058:
+            await self.bot.close()
+        else:
+            return
+    
+    @commands.command()
     @commands.guild_only()
     async def pull(self, ctx: commands.Context, member: discord.User, *, reason=""):
         channel = ctx.guild.get_channel(Configuration.getConfigVar(ctx.guild.id, "PULLROOM"))
@@ -38,6 +45,7 @@ class pullroom(commands.Cog):
             return
         if ctx.author.id == member.id:
             await ctx.send("Sorry, I am unable to help you to pull yourself in the pullroom.")
+            return
         if reason == "":
             await ctx.send("Please specify a reason that you are pulling the user in!")
             return
@@ -95,6 +103,7 @@ class pullroom(commands.Cog):
             return
         if ctx.author.id == member.id:
             await ctx.send("Sorry, I am unable to help you to pull yourself out of the pullroom.")
+            return
         if pullroomrole not in user.roles:
             await ctx.send("This user already have had their role removed, likely manually by another moderator.")
             return
